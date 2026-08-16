@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="data:,">
+    <title>DeformMaster: An Interactive Physics-Neural World Model for Deformable Objects from Videos</title>
+    <meta name="description" content="DeformMaster turns a phone-captured monocular video of deformable objects into an online interactive physics-neural world model.">
+    <link rel="canonical" href="https://can-lee.github.io/deformmaster-web/">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://can-lee.github.io/deformmaster-web/">
+    <meta property="og:title" content="DeformMaster: An Interactive Physics-Neural World Model for Deformable Objects from Videos">
+    <meta property="og:description" content="DeformMaster turns a phone-captured monocular video of deformable objects into an online interactive physics-neural world model.">
+    <meta property="og:image" content="https://can-lee.github.io/deformmaster-web/static/images/teaser.png">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="DeformMaster: An Interactive Physics-Neural World Model for Deformable Objects from Videos">
+    <meta name="twitter:description" content="DeformMaster turns a phone-captured monocular video of deformable objects into an online interactive physics-neural world model.">
+    <meta name="twitter:image" content="https://can-lee.github.io/deformmaster-web/static/images/teaser.png">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+    <link rel="stylesheet" href="https://jpswalsh.github.io/academicons/css/academicons.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans">
+    <link rel="stylesheet" href="static/css/index.css">
+</head>
+<body>
+
+<!-- ============================== HERO ============================== -->
+<section class="hero" style="padding-bottom: 0;">
+    <div class="hero-body" style="padding-bottom: 0;">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered">
+                <div class="column has-text-centered">
+                    <h1 class="title is-1 publication-title">
+                        <span class="title-main">DeformMaster</span>
+                        <span class="title-subtitle">An Interactive Physics-Neural World Model for Deformable Objects from Videos</span>
+                    </h1>
+
+                    <div class="is-size-5 publication-authors">
+                        <span class="author-block">Can Li<sup>1,*</sup>,</span>
+                        <span class="author-block">Zhoujian Li<sup>2,*</sup>,</span>
+                        <span class="author-block"><a href="https://liren2515.github.io/" target="_blank" rel="noopener">Ren Li</a><sup>3</sup>,</span>
+                        <span class="author-block">Jie Gu<sup>4</sup>,</span>
+                        <span class="author-block">Lei Lei<sup>5,*</sup>,</span>
+                        <span class="author-block">Jingmin Chen<sup>4</sup>,</span>
+                        <span class="author-block">Lei Sun<sup>1</sup></span>
+                    </div>
+
+                    <div class="is-size-6 publication-authors">
+                        <span class="author-block"><sup>1</sup>Nankai University&nbsp;&nbsp;</span>
+                        <span class="author-block"><sup>2</sup>Zhejiang University&nbsp;&nbsp;</span>
+                        <span class="author-block"><sup>3</sup>Southern University of Science and Technology</span>
+                        <br>
+                        <span class="author-block"><sup>4</sup><a href="https://www.a4x.io/" target="_blank" rel="noopener">Rightly Robotics, A4X</a>&nbsp;&nbsp;</span>
+                        <span class="author-block"><sup>5</sup>University of Science and Technology of China</span>
+                    </div>
+                    <div class="is-size-7 publication-authors" style="margin-top: 0.4em;">
+                        <span class="author-block"><sup>*</sup>Interned at <a href="https://www.a4x.io/" target="_blank" rel="noopener">Rightly Robotics, A4X</a>.</span>
+                    </div>
+
+                    <div class="column has-text-centered">
+                        <div class="publication-links">
+                            <span class="link-block">
+                                <a href="https://arxiv.org/abs/2605.09586" class="external-link button is-normal is-rounded is-grey" target="_blank" rel="noopener">
+                                    <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                                    <span>arXiv</span>
+                                </a>
+                            </span>
+                            <span class="link-block">
+                                <a href="https://github.com/CAN-Lee/DeformMaster" class="external-link button is-normal is-rounded is-grey" target="_blank" rel="noopener">
+                                    <span class="icon"><i class="fab fa-github"></i></span>
+                                    <span>Code</span>
+                                </a>
+                            </span>
+                            <span class="link-block">
+                                <a href="https://huggingface.co/datasets/Canlee/DeformMaster-Assets" class="external-link button is-normal is-rounded is-grey" target="_blank" rel="noopener">
+                                    <span class="icon"><img src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" alt="Hugging Face" style="height: 1em;"></span>
+                                    <span>Ckpt &amp; Data</span>
+                                </a>
+                            </span>
+                            <span class="link-block">
+                                <a href="#" class="external-link button is-normal is-rounded is-grey">
+                                    <span class="icon"><img src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" alt="Hugging Face" style="height: 1em;"></span>
+                                    <span>HF Space Demo (coming)</span>
+                                </a>
+                            </span>
+                            <span class="link-block">
+                                <a href="#bibtex" class="external-link button is-normal is-rounded is-grey">
+                                    <span class="icon"><i class="fas fa-quote-right"></i></span>
+                                    <span>BibTeX</span>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================== TEASER ============================== -->
+<section class="hero teaser" style="padding-top: 0;">
+    <div class="container is-max-desktop">
+        <div class="hero-body" style="padding-top: 0;">
+            <figure class="method-figure">
+                <img src="static/images/teaser_web.jpg" alt="DeformMaster teaser"
+                     style="max-width: 100%; height: auto; border-radius: 6px;">
+            </figure>
+            <h2 class="subtitle has-text-justified">
+                <strong>DeformMaster</strong> turns a phone-captured monocular video of deformable objects
+                into an online interactive world model. By recovering both underlying physics and
+                high-fidelity appearance, it supports long-horizon rollouts under novel actions,
+                material-parameter variation, and novel-view synthesis.
+            </h2>
+            <h2 class="title is-3 has-text-centered" style="margin-top: 2rem;">Online Interaction</h2>
+            <figure class="method-figure" style="margin-top: 1rem;">
+                <video src="static/videos/arxiv_web.mp4" autoplay muted controls loop playsinline preload="metadata"
+                       style="max-width: 100%; height: auto; border-radius: 6px;">
+                    Your browser does not support HTML5 video.
+                </video>
+            </figure>
+
+            <h3 class="title is-5 has-text-centered" style="margin-top: 2.5rem;">Novel action- and material-conditioned prediction</h3>
+            <p class="has-text-justified has-text-grey-dark" style="margin-bottom: 1rem;">
+                DeformMaster supports rollouts under novel actions and material-parameter variations, going beyond observations and baselines.
+            </p>
+            <div class="columns is-multiline is-mobile is-variable is-3">
+                <div class="column is-half-tablet is-full-mobile">
+                    <video src="static/videos/rope_video.mp4" autoplay muted loop playsinline preload="metadata" style="width: 100%; border-radius: 4px;"></video>
+                </div>
+                <div class="column is-half-tablet is-full-mobile">
+                    <video src="static/videos/sloth_video.mp4" autoplay muted loop playsinline preload="metadata" style="width: 100%; border-radius: 4px;"></video>
+                </div>
+            </div>
+
+            <p class="has-text-centered has-text-grey" style="margin-top: 0.75rem;">
+                More online interactive demo coming.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ============================== ABSTRACT ============================== -->
+<section class="section">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+                <h2 class="title is-3">Abstract</h2>
+                <div class="content has-text-justified">
+                    <p>
+                        World models for deformable objects should recover not only geometry and
+                        appearance, but also underlying physical dynamics, interaction grounding, and
+                        material behavior. Learning such a model from real videos is challenging because
+                        deformable linear, planar, and volumetric objects evolve under high-dimensional
+                        deformation, noisy interactions, and complex material response. The model must
+                        therefore infer a physical state from visual observations, roll it forward under
+                        new interactions, and render the resulting dynamics with high visual fidelity.
+                    </p>
+                    <p>
+                        We present <strong>DeformMaster</strong>, a video-derived interactive
+                        physics-neural world model that turns real interaction videos into an online
+                        interactive model of deformable objects within a unified
+                        dynamics-and-appearance framework. DeformMaster preserves structured physical
+                        rollout while using a neural residual to compensate for unmodeled effects, grounds
+                        sparse hand motion as distributed compliant actuators for hand-continuum
+                        interaction, represents material response with spatially varying constitutive
+                        experts, and drives high-fidelity 4D appearance from the predicted physical
+                        evolution. Experiments on real-world deformable-object sequences demonstrate
+                        DeformMaster's ability to roll out future dynamics and render dynamic appearance,
+                        outperforming state-of-the-art baselines while supporting novel action rollout,
+                        material-parameter variation, and dynamic novel-view synthesis.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================== METHOD ============================== -->
+<section class="section">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered">
+            <div class="column is-full">
+                <h2 class="title is-3 has-text-centered">Method</h2>
+                <figure class="method-figure">
+                    <img src="static/images/method.png" alt="DeformMaster method overview">
+                </figure>
+                <div class="content has-text-justified">
+                    <p>
+                        DeformMaster learns a deformable-object world model from interaction videos by
+                        coupling interactive physics-neural dynamics with physics-grounded appearance.
+                        It integrates four components for stable dynamics rollout, robust hand-continuum
+                        interaction, heterogeneous material response, and high-fidelity rendering:
+                    </p>
+                    <ul>
+                        <li><strong>Physics-Neural Particle-Grid Dynamics (PNPGD).</strong>
+                            A differentiable MPM block advances the material-particle state over each
+                            frame, while a particle-grid neural residual estimates a residual velocity field
+                            from the post-MPM state and short motion history. This keeps rollout
+                            structured and stable while absorbing systematic real-world mismatch.</li>
+                        <li><strong>Distributed Compliant Actuators (DCA).</strong>
+                            Vision-derived hand tracks are treated as compliant actuator anchors rather
+                            than hard point constraints. Local actuator-particle couplings damp tracking
+                            noise and distribute forces over contact patches, yielding robust
+                            hand-continuum interaction.</li>
+                        <li><strong>Mixture of Constitutive Experts (MoCE).</strong>
+                            The stress response is represented as a spatially varying mixture of named
+                            constitutive laws, including Neo-Hookean, Corotated, and StVK experts. Patch
+                            expert weights and learnable material parameters let different regions express
+                            different deformation behavior.</li>
+                        <li><strong>Physics-grounded 4D appearance.</strong>
+                            Gaussian splats are incrementally deformed by the predicted material-particle
+                            trajectory using linear blend skinning. Rendering therefore stays aligned with
+                            physical motion without re-optimizing a separate dynamic appearance model for
+                            each new action.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================== RESULTS ============================== -->
+<section class="section">
+    <div class="container is-max-desktop">
+        <h2 class="title is-3 has-text-centered">Results</h2>
+        <div class="content has-text-justified">
+            <p>
+                We evaluate DeformMaster on real-world deformable-object sequences spanning
+                linear (ropes), planar (cloths, packages), and volumetric (softbodied toys) objects.
+                <!--
+                The model outperforms state-of-the-art baselines on both dynamics metrics
+                (Chamfer distance, Track error, mask IoU) and appearance metrics (PSNR, SSIM, LPIPS),
+                and supports online interactive rollout, novel-action
+                rollout, material-parameter variation, and dynamic novel-view synthesis.
+                -->
+            </p>
+        </div>
+
+        <h3 class="title is-5 has-text-centered" style="margin-top: 2rem;">Qualitative results</h3>
+        <p class="has-text-justified has-text-grey-dark" style="margin-bottom: 1rem;">
+            Action-conditioned rollouts of DeformMaster on the deformable objects (from <a href="https://jianghanxiao.github.io/phystwin-web/" target="_blank" rel="noopener">PhysTwin</a>). Foreground: prediction; background: ground truth.
+        </p>
+        <div class="columns is-multiline is-mobile is-variable is-2">
+            <div class="column is-one-quarter-tablet is-half-mobile">
+                <video src="static/videos/results/double_lift_cloth_1_view0_bg_alpha06_white.mp4" autoplay muted loop playsinline preload="metadata" style="width: 100%; border-radius: 4px;"></video>
+                <p class="has-text-centered is-size-7" style="margin-top: 0.25rem;">double_lift_cloth_1</p>
+            </div>
+            <div class="column is-one-quarter-tablet is-half-mobile">
+                <video src="static/videos/results/double_lift_cloth_3_view0_bg_alpha06_white.mp4" autoplay muted loop playsinline preload="metadata" style="width: 100%; border-radius: 4px;"></video>
+                <p class="has-text-centered is-size-7" style="margin-top: 0.25rem;">double_lift_cloth_3</p>
+            </div>
+            <div class="column is-one-quarter-tablet is-half-mobile">
+                <video src="static/videos/results/double_lift_sloth_view0_bg_alpha06_white.mp4" autoplay muted loop playsinline preload="metadata" style="width: 100%; border-radius: 4px;"></video>
+                <p class="has-text-centered is-size-7" style="margin-top: 0.25rem;">double_lift_sloth</p>
+            </div>
+            <div class="column is-one-quarter-tablet is-half-mobile">
+                <video src="static/videos/results/double_lift_zebra_view0_bg_alpha06_white.mp4" autoplay muted loop playsinline preload="metadata" style="width: 100%; border-radius: 4px;"></video>
+                <p class="has-text-centered is-size-7" style="margin-top: 0.25rem;">double_lift_zebra</p>
+            </div>
+            <div class="column is-one-quarter-tablet is-half-mobile">
+                <video src="static/videos/results/double_stretch_sloth_view0_bg_alpha06_white.mp4" autoplay muted loop playsinline preload="metadata" style="width: 100%; border-radius: 4px;"></video>
+                <p class="has-text-centered is-size-7" style="margin-top: 0.25rem;">double_stretch_sloth</p>
+            </div>
+            <div class="column is-one-quarter-tablet is-half-mobile">
+                <video src="static/videos/results/double_stretch_zebra_view0_bg_alpha06_white.mp4" autoplay muted loop playsinline preload="metadata" style="width: 100%; border-radius: 4px;"></video>
+                <p class="has-text-centered is-size-7" style="margin-top: 0.25rem;">double_stretch_zebra</p>
+            </div>
+            <div class="column is-one-quarter-tablet is-half-mobile">
+                <video src="static/videos/results/single_clift_cloth_1_view0_bg_alpha06_white.mp4" autoplay muted loop playsinline preload="metadata" style="width: 100%; border-radius: 4px;"></video>
+                <p class="has-text-centered is-size-7" style="margin-top: 0.25rem;">single_clift_cloth_1</p>
+            </div>
+            <div class="column is-one-quarter-tablet is-half-mobile">
+                <video src="static/videos/results/single_clift_cloth_3_view0_bg_alpha06_white.mp4" autoplay muted loop playsinline preload="metadata" style="width: 100%; border-radius: 4px;"></video>
+                <p class="has-text-centered is-size-7" style="margin-top: 0.25rem;">single_clift_cloth_3</p>
+            </div>
+            <div class="column is-one-quarter-tablet is-half-mobile">
+                <video src="static/videos/results/single_lift_cloth_view0_bg_alpha06_white.mp4" autoplay muted loop playsinline preload="metadata" style="width: 100%; border-radius: 4px;"></video>
+                <p class="has-text-centered is-size-7" style="margin-top: 0.25rem;">single_lift_cloth</p>
+            </div>
+            <div class="column is-one-quarter-tablet is-half-mobile">
+                <video src="static/videos/results/single_lift_cloth_1_view0_bg_alpha06_white.mp4" autoplay muted loop playsinline preload="metadata" style="width: 100%; border-radius: 4px;"></video>
+                <p class="has-text-centered is-size-7" style="margin-top: 0.25rem;">single_lift_cloth_1</p>
+            </div>
+            <div class="column is-one-quarter-tablet is-half-mobile">
+                <video src="static/videos/results/single_lift_cloth_3_view0_bg_alpha06_white.mp4" autoplay muted loop playsinline preload="metadata" style="width: 100%; border-radius: 4px;"></video>
+                <p class="has-text-centered is-size-7" style="margin-top: 0.25rem;">single_lift_cloth_3</p>
+            </div>
+            <div class="column is-one-quarter-tablet is-half-mobile">
+                <video src="static/videos/results/single_lift_cloth_4_view0_bg_alpha06_white.mp4" autoplay muted loop playsinline preload="metadata" style="width: 100%; border-radius: 4px;"></video>
+                <p class="has-text-centered is-size-7" style="margin-top: 0.25rem;">single_lift_cloth_4</p>
+            </div>
+            <div class="column is-one-quarter-tablet is-half-mobile">
+                <video src="static/videos/results/single_lift_dinosor_view0_bg_alpha06_white.mp4" autoplay muted loop playsinline preload="metadata" style="width: 100%; border-radius: 4px;"></video>
+                <p class="has-text-centered is-size-7" style="margin-top: 0.25rem;">single_lift_dinosor</p>
+            </div>
+            <div class="column is-one-quarter-tablet is-half-mobile">
+                <video src="static/videos/results/single_lift_rope_view0_bg_alpha06_white.mp4" autoplay muted loop playsinline preload="metadata" style="width: 100%; border-radius: 4px;"></video>
+                <p class="has-text-centered is-size-7" style="margin-top: 0.25rem;">single_lift_rope</p>
+            </div>
+            <div class="column is-one-quarter-tablet is-half-mobile">
+                <video src="static/videos/results/single_lift_sloth_view0_bg_alpha06_white.mp4" autoplay muted loop playsinline preload="metadata" style="width: 100%; border-radius: 4px;"></video>
+                <p class="has-text-centered is-size-7" style="margin-top: 0.25rem;">single_lift_sloth</p>
+            </div>
+            <div class="column is-one-quarter-tablet is-half-mobile">
+                <video src="static/videos/results/single_lift_zebra_view0_bg_alpha06_white.mp4" autoplay muted loop playsinline preload="metadata" style="width: 100%; border-radius: 4px;"></video>
+                <p class="has-text-centered is-size-7" style="margin-top: 0.25rem;">single_lift_zebra</p>
+            </div>
+            <div class="column is-one-quarter-tablet is-half-mobile">
+                <video src="static/videos/results/single_push_rope_view0_bg_alpha06_white.mp4" autoplay muted loop playsinline preload="metadata" style="width: 100%; border-radius: 4px;"></video>
+                <p class="has-text-centered is-size-7" style="margin-top: 0.25rem;">single_push_rope</p>
+            </div>
+            <div class="column is-one-quarter-tablet is-half-mobile">
+                <video src="static/videos/results/single_push_rope_1_view0_bg_alpha06_white.mp4" autoplay muted loop playsinline preload="metadata" style="width: 100%; border-radius: 4px;"></video>
+                <p class="has-text-centered is-size-7" style="margin-top: 0.25rem;">single_push_rope_1</p>
+            </div>
+            <div class="column is-one-quarter-tablet is-half-mobile">
+                <video src="static/videos/results/single_push_sloth_view0_bg_alpha06_white.mp4" autoplay muted loop playsinline preload="metadata" style="width: 100%; border-radius: 4px;"></video>
+                <p class="has-text-centered is-size-7" style="margin-top: 0.25rem;">single_push_sloth</p>
+            </div>
+            <div class="column is-one-quarter-tablet is-half-mobile">
+                <video src="static/videos/results/weird_package_view0_bg_alpha06_white.mp4" autoplay muted loop playsinline preload="metadata" style="width: 100%; border-radius: 4px;"></video>
+                <p class="has-text-centered is-size-7" style="margin-top: 0.25rem;">weird_package</p>
+            </div>
+        </div>
+
+        <h3 class="title is-5 has-text-centered" style="margin-top: 2.5rem;">Comparisons</h3>
+        <p class="has-text-justified has-text-grey-dark" style="margin-bottom: 1rem;">
+            Side-by-side comparisons between a baseline and DeformMaster on representative deformable-object sequences.
+        </p>
+        <div class="columns is-mobile is-variable is-3" style="margin-bottom: 0;">
+            <div class="column is-half has-text-centered"><strong>Baseline (<a href="https://jianghanxiao.github.io/phystwin-web/" target="_blank" rel="noopener">PhysTwin</a>)</strong></div>
+            <div class="column is-half has-text-centered"><strong>Ours</strong></div>
+        </div>
+        <div class="columns is-multiline is-mobile is-variable is-3">
+            <div class="column is-half">
+                <video src="static/videos/baselines/double_lift_zebra_view0_bg_alpha06_white.mp4" autoplay muted loop playsinline preload="metadata" style="width: 100%; border-radius: 4px;"></video>
+                <p class="has-text-centered is-size-7" style="margin-top: 0.25rem;">double_lift_zebra</p>
+            </div>
+            <div class="column is-half">
+                <video src="static/videos/results/double_lift_zebra_view0_bg_alpha06_white.mp4" autoplay muted loop playsinline preload="metadata" style="width: 100%; border-radius: 4px;"></video>
+                <p class="has-text-centered is-size-7" style="margin-top: 0.25rem;">double_lift_zebra</p>
+            </div>
+            <div class="column is-half">
+                <video src="static/videos/baselines/double_lift_sloth_view0_bg_alpha06_white.mp4" autoplay muted loop playsinline preload="metadata" style="width: 100%; border-radius: 4px;"></video>
+                <p class="has-text-centered is-size-7" style="margin-top: 0.25rem;">double_lift_sloth</p>
+            </div>
+            <div class="column is-half">
+                <video src="static/videos/results/double_lift_sloth_view0_bg_alpha06_white.mp4" autoplay muted loop playsinline preload="metadata" style="width: 100%; border-radius: 4px;"></video>
+                <p class="has-text-centered is-size-7" style="margin-top: 0.25rem;">double_lift_sloth</p>
+            </div>
+        </div>
+
+        <h3 class="title is-5 has-text-centered" style="margin-top: 2.5rem;">Per-category dynamics prediction</h3>
+        <p class="has-text-justified has-text-grey-dark" style="margin-bottom: 1rem;">
+            Per-category dynamics prediction on the PhysTwin sequences (n=20), grouped into deformable
+            <em>linear</em>, <em>planar</em>, and <em>volumetric</em> objects.
+        </p>
+        <div class="table-container" style="overflow-x: auto;">
+            <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth has-text-centered">
+                <thead>
+                    <tr>
+                        <th rowspan="2" class="has-text-centered">Method</th>
+                        <th colspan="3" class="has-text-centered">Linear (n=3)</th>
+                        <th colspan="3" class="has-text-centered">Planar (n=9)</th>
+                        <th colspan="3" class="has-text-centered">Volumetric (n=8)</th>
+                    </tr>
+                    <tr>
+                        <th>IoU&nbsp;&uarr;</th>
+                        <th>Chamfer&nbsp;&darr;</th>
+                        <th>Track&nbsp;&darr;</th>
+                        <th>IoU&nbsp;&uarr;</th>
+                        <th>Chamfer&nbsp;&darr;</th>
+                        <th>Track&nbsp;&darr;</th>
+                        <th>IoU&nbsp;&uarr;</th>
+                        <th>Chamfer&nbsp;&darr;</th>
+                        <th>Track&nbsp;&darr;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="has-text-left">PhysTwin</td>
+                        <td>0.658</td><td>0.007</td><td>0.013</td>
+                        <td>0.738</td><td>0.013</td><td><strong>0.028</strong></td>
+                        <td>0.748</td><td>0.013</td><td>0.021</td>
+                    </tr>
+                    <tr>
+                        <td class="has-text-left"><strong>DeformMaster (ours)</strong></td>
+                        <td><strong>0.721</strong></td><td><strong>0.005</strong></td><td><strong>0.010</strong></td>
+                        <td><strong>0.748</strong></td><td><strong>0.013</strong></td><td>0.032</td>
+                        <td><strong>0.756</strong></td><td><strong>0.012</strong></td><td><strong>0.020</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+        <p class="has-text-centered has-text-grey" style="margin-top: 2rem;">
+            More quantitative results, qualitative results, ablations, and an interactive online playground will be released here.
+        </p>
+    </div>
+</section>
+
+<!-- ============================== ACKNOWLEDGMENT ============================== -->
+<section class="section" id="acknowledgment">
+    <div class="container is-max-desktop">
+        <h2 class="title is-3">Acknowledgment</h2>
+        <p>
+            This work was done during an internship at
+            <a href="https://www.a4x.io/" target="_blank" rel="noopener">Rightly Robotics, A4X</a>.
+            We thank the authors of
+            <a href="https://jianghanxiao.github.io/phystwin-web/" target="_blank" rel="noopener">PhysTwin</a>,
+            <a href="https://kywind.github.io/pgnd" target="_blank" rel="noopener">PGND</a>, and
+            <a href="https://github.com/graphdeco-inria/gaussian-splatting" target="_blank" rel="noopener">3D Gaussian Splatting</a>.
+        </p>
+    </div>
+</section>
+
+<!-- ============================== BIBTEX ============================== -->
+<section class="section bibtex-block" id="bibtex">
+    <div class="container is-max-desktop">
+        <h2 class="title is-3">BibTeX</h2>
+        <pre><code>@article{li2026deformmaster,
+      title={DeformMaster: An Interactive Physics-Neural World Model for Deformable Objects from Videos},
+      author={Can Li and Zhoujian Li and Ren Li and Jie Gu and Lei Lei and Jingmin Chen and Lei Sun},
+      year={2026},
+      eprint={2605.09586},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2605.09586},
+}</code></pre>
+    </div>
+</section>
+
+<!-- ============================== FOOTER ============================== -->
+<footer>
+    <p>
+        Page template adapted from
+        <a href="https://github.com/nerfies/nerfies.github.io" target="_blank">Nerfies</a>;
+        source code released under the
+        <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC&nbsp;BY-SA&nbsp;4.0</a>
+        license.
+    </p>
+</footer>
+
+</body>
+</html>
