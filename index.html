@@ -22,8 +22,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans">
-    <link rel="stylesheet" href="static/css/index.css">
-    <script defer src="static/js/index.js"></script>
+    <link rel="stylesheet" href="static/css/index.css?v=20260819-2">
+    <script defer src="static/js/index.js?v=20260819-2"></script>
 </head>
 <body>
 
@@ -112,40 +112,6 @@
             optimize global material properties, local constitutive variations, and neural residual
             responses.
         </p>
-
-        <div class="method-features reveal">
-            <div class="feature-card">
-                <div class="feature-number">01</div>
-                <h3 class="feature-title">Spatially Varying Hybrid Expert&ndash;Neural Constitutive Field</h3>
-                <p class="feature-text">
-                    PhysReal represents the object as a compact spatially varying constitutive field using
-                    distributed material patches. Each local region can express different material
-                    properties, while analytical expert models provide interpretable physical priors and
-                    neural constitutive residuals capture elastic and plastic responses beyond predefined
-                    formulations.
-                </p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-number">02</div>
-                <h3 class="feature-title">Progressive Constitutive Learning</h3>
-                <p class="feature-text">
-                    The optimization is progressively expanded from global expert parameters to
-                    patch-level spatial variations and finally neural constitutive residuals, following a
-                    <strong>Global &rarr; Local &rarr; Residual</strong> curriculum. This improves
-                    optimization stability while gradually increasing model expressiveness.
-                </p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-number">03</div>
-                <h3 class="feature-title">Motion&ndash;Mask Supervision</h3>
-                <p class="feature-text">
-                    Sparse tracked motion provides explicit temporal correspondence for dynamic fitting,
-                    while differentiable 3DGS-based mask supervision constrains dense object geometry and
-                    silhouette. Their complementary supervision enables robust physical property recovery
-                    from sparse visual observations.
-                </p>
-            </div>
-        </div>
     </div>
 </section>
 
@@ -164,7 +130,6 @@
         <div class="results-sublinks reveal">
             <a href="#qualitative">Qualitative Results</a>
             <a href="#comparisons">Comparison with Baselines</a>
-            <a href="#quantitative">Quantitative Results</a>
         </div>
 
         <!-- ---------- Qualitative Results ---------- -->
@@ -194,126 +159,6 @@
             <h4 class="scene-current reveal" id="comparison-scene-title">rope_double_hand</h4>
             <div class="comparison-grid reveal" id="comparison-grid"></div>
         </div>
-
-        <!-- ---------- Quantitative Results ---------- -->
-        <div class="results-subsection" id="quantitative">
-            <h3 class="subsection-title reveal">Quantitative Results</h3>
-            <p class="subsection-text reveal">
-                We evaluate both 3D and 2D physical dynamics using four metrics: Chamfer Distance
-                (CD &darr;), Track Error (Track &darr;), Intersection-over-Union (IoU &uarr;), and Peak
-                Signal-to-Noise Ratio (PSNR &uarr;).
-            </p>
-
-            <div class="quant-inner">
-            <h4 class="table-subtitle reveal">PhysTwin Dataset</h4>
-        <div class="table-wrapper reveal">
-            <table class="quant-table">
-                <caption>Quantitative comparison on the PhysTwin dataset.</caption>
-                <thead>
-                    <tr>
-                        <th rowspan="2" class="col-method">Method</th>
-                        <th colspan="4" class="group-header">Training</th>
-                        <th colspan="4" class="group-header group-sep">Testing</th>
-                    </tr>
-                    <tr>
-                        <th>CD &darr;</th>
-                        <th>Track &darr;</th>
-                        <th>IoU &uarr;</th>
-                        <th>PSNR &uarr;</th>
-                        <th class="group-sep">CD &darr;</th>
-                        <th>Track &darr;</th>
-                        <th>IoU &uarr;</th>
-                        <th>PSNR &uarr;</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="col-method">GS-Dynamics</td>
-                        <td>0.018</td><td>0.027</td><td>67.34</td><td>25.92</td>
-                        <td class="group-sep">0.054</td><td>0.081</td><td>37.77</td><td>21.47</td>
-                    </tr>
-                    <tr>
-                        <td class="col-method">Spring-Gaus</td>
-                        <td>0.016</td><td>0.027</td><td>74.35</td><td>27.59</td>
-                        <td class="group-sep">0.034</td><td>0.062</td><td>51.32</td><td>23.79</td>
-                    </tr>
-                    <tr>
-                        <td class="col-method">PhysFlow</td>
-                        <td>0.010</td><td>0.017</td><td>78.80</td><td>27.88</td>
-                        <td class="group-sep">0.017</td><td>0.034</td><td>62.20</td><td>24.42</td>
-                    </tr>
-                    <tr>
-                        <td class="col-method">PhysTwin</td>
-                        <td>0.011</td><td><strong>0.013</strong></td><td>80.90</td><td>27.83</td>
-                        <td class="group-sep">0.017</td><td><strong>0.027</strong></td><td>65.79</td><td>24.87</td>
-                    </tr>
-                    <tr class="row-ours">
-                        <td class="col-method">PhysReal</td>
-                        <td><strong>0.008</strong></td><td>0.014</td><td><strong>86.84</strong></td><td><strong>28.98</strong></td>
-                        <td class="group-sep"><strong>0.015</strong></td><td><strong>0.027</strong></td><td><strong>75.12</strong></td><td><strong>26.53</strong></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-            <h4 class="table-subtitle reveal">Self-collected Dataset</h4>
-        <div class="table-wrapper reveal">
-            <table class="quant-table">
-                <caption>Quantitative comparison on the self-collected dataset.</caption>
-                <thead>
-                    <tr>
-                        <th rowspan="2" class="col-method">Method</th>
-                        <th colspan="4" class="group-header">Training</th>
-                        <th colspan="4" class="group-header group-sep">Testing</th>
-                    </tr>
-                    <tr>
-                        <th>CD &darr;</th>
-                        <th>Track &darr;</th>
-                        <th>IoU &uarr;</th>
-                        <th>PSNR &uarr;</th>
-                        <th class="group-sep">CD &darr;</th>
-                        <th>Track &darr;</th>
-                        <th>IoU &uarr;</th>
-                        <th>PSNR &uarr;</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="col-method">GS-Dynamics</td>
-                        <td>0.000</td><td>0.000</td><td>0.00</td><td>0.00</td>
-                        <td class="group-sep">0.000</td><td>0.000</td><td>0.00</td><td>0.00</td>
-                    </tr>
-                    <tr>
-                        <td class="col-method">Spring-Gaus</td>
-                        <td>0.016</td><td>0.026</td><td>82.72</td><td>22.23</td>
-                        <td class="group-sep">0.034</td><td>0.063</td><td>61.52</td><td>17.21</td>
-                    </tr>
-                    <tr>
-                        <td class="col-method">PhysFlow</td>
-                        <td>0.010</td><td>0.018</td><td>79.84</td><td>21.17</td>
-                        <td class="group-sep">0.015</td><td>0.034</td><td>64.65</td><td>16.99</td>
-                    </tr>
-                    <tr>
-                        <td class="col-method">PhysTwin</td>
-                        <td>0.022</td><td>0.025</td><td>74.84</td><td>19.45</td>
-                        <td class="group-sep">0.030</td><td>0.043</td><td>60.80</td><td>16.30</td>
-                    </tr>
-                    <tr class="row-ours">
-                        <td class="col-method">PhysReal</td>
-                        <td><strong>0.008</strong></td><td><strong>0.010</strong></td><td><strong>90.32</strong></td><td><strong>23.80</strong></td>
-                        <td class="group-sep"><strong>0.012</strong></td><td><strong>0.020</strong></td><td><strong>80.00</strong></td><td><strong>19.70</strong></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-            <p class="lead-text reveal quant-summary">
-                PhysReal achieves the best CD, IoU, and PSNR on the PhysTwin dataset for both
-                resimulation and future prediction, while achieving the best overall performance across
-                all reported metrics on the self-collected dataset.
-            </p>
-            </div>
-        </div>
     </div>
 </section>
 
@@ -321,64 +166,22 @@
 <section class="page-section section-applications" id="applications">
     <div class="container-narrow">
         <h2 class="section-title reveal">Downstream Applications</h2>
-        <p class="lead-text reveal">
-            Beyond reconstruction and prediction, the recovered physical model supports a range of
-            downstream applications, including interactive simulation, embodied data generation,
-            real-time physical digital twins, and model-based manipulation.
-        </p>
 
-        <div class="application-block reveal">
-            <div class="application-header">
-                <span class="application-number">01</span>
-                <h3 class="subsection-title application-title">Interactive Simulation</h3>
-            </div>
-            <p class="subsection-text application-text">
-                PhysReal supports interactive simulation of novel manipulation trajectories. Users can
-                directly manipulate the recovered object and observe its predicted deformation without
-                retraining or additional optimization.
-            </p>
-            <!-- FUTURE MEDIA: INTERACTIVE SIMULATION -->
-        </div>
-
-        <div class="application-block reveal">
-            <div class="application-header">
-                <span class="application-number">02</span>
-                <h3 class="subsection-title application-title">Embodied Data Generation</h3>
-            </div>
-            <p class="subsection-text application-text">
-                PhysReal uses privileged particle states to identify reliable grasping and interaction
-                targets across diverse object configurations. Combined with realistic 3DGS rendering, it
-                enables scalable generation of paired visual observations and robot actions.
-            </p>
+        <!-- FUTURE APPLICATION: INTERACTIVE SIMULATION -->
+        <div class="results-subsection">
+            <h3 class="subsection-title reveal">Embodied Data Generation</h3>
             <!-- CURRENT MEDIA: EMBODIED DATA GENERATION -->
-            <div class="data-gen-grid" id="data-generation-grid"></div>
-        </div>
-
-        <div class="application-block reveal">
-            <div class="application-header">
-                <span class="application-number">03</span>
-                <h3 class="subsection-title application-title">Real-time Physical Digital Twin</h3>
+            <div class="data-gen-carousel reveal" id="data-gen-carousel">
+                <button class="carousel-btn carousel-prev" id="data-gen-prev" aria-label="Previous videos">&#10094;</button>
+                <div class="carousel-viewport" id="data-gen-viewport">
+                    <div class="carousel-track" id="data-gen-track"></div>
+                </div>
+                <button class="carousel-btn carousel-next" id="data-gen-next" aria-label="Next videos">&#10095;</button>
             </div>
-            <p class="subsection-text application-text">
-                PhysReal jointly reconstructs the environment, robot, and deformable objects to create a
-                physics-grounded digital twin. Its coupled 3DGS-MPM representation synchronizes visual
-                and physical states for real-time monitoring and simulation of workspace interactions.
-            </p>
-            <!-- FUTURE MEDIA: REAL-TIME PHYSICAL DIGITAL TWIN -->
+            <div class="carousel-dots" id="data-gen-dots"></div>
         </div>
-
-        <div class="application-block reveal">
-            <div class="application-header">
-                <span class="application-number">04</span>
-                <h3 class="subsection-title application-title">Model-based Manipulation</h3>
-            </div>
-            <p class="subsection-text application-text">
-                PhysReal provides a forward dynamics model for model predictive control (MPC). Given a
-                target configuration, MPC evaluates candidate actions through simulation and optimizes
-                the robot trajectory to achieve the desired object state.
-            </p>
-            <!-- FUTURE MEDIA: MODEL-BASED MANIPULATION -->
-        </div>
+        <!-- FUTURE APPLICATION: REAL-TIME PHYSICAL DIGITAL TWIN -->
+        <!-- FUTURE APPLICATION: MODEL-BASED MANIPULATION -->
     </div>
 </section>
 
