@@ -4,443 +4,395 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="data:,">
-    <title>DeformMaster: An Interactive Physics-Neural World Model for Deformable Objects from Videos</title>
-    <meta name="description" content="DeformMaster turns a phone-captured monocular video of deformable objects into an online interactive physics-neural world model.">
-    <link rel="canonical" href="https://can-lee.github.io/deformmaster-web/">
+    <title>PhysReal: Discovering Spatially Varying Hybrid Constitutive Fields for Real Deformable Objects</title>
+    <meta name="description" content="PhysReal couples 3DGS-based appearance with differentiable MPM physics to recover object-specific deformable dynamics from single-view interactive videos via spatially varying hybrid constitutive fields.">
+    <link rel="canonical" href="https://physreal.github.io/anonymous_web/">
 
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://can-lee.github.io/deformmaster-web/">
-    <meta property="og:title" content="DeformMaster: An Interactive Physics-Neural World Model for Deformable Objects from Videos">
-    <meta property="og:description" content="DeformMaster turns a phone-captured monocular video of deformable objects into an online interactive physics-neural world model.">
-    <meta property="og:image" content="https://can-lee.github.io/deformmaster-web/static/images/teaser.png">
+    <meta property="og:url" content="https://physreal.github.io/anonymous_web/">
+    <meta property="og:title" content="PhysReal: Discovering Spatially Varying Hybrid Constitutive Fields for Real Deformable Objects">
+    <meta property="og:description" content="PhysReal couples 3DGS-based appearance with differentiable MPM physics to recover object-specific deformable dynamics from single-view interactive videos.">
+    <meta property="og:image" content="https://physreal.github.io/anonymous_web/static/images/figure1.png">
 
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="DeformMaster: An Interactive Physics-Neural World Model for Deformable Objects from Videos">
-    <meta name="twitter:description" content="DeformMaster turns a phone-captured monocular video of deformable objects into an online interactive physics-neural world model.">
-    <meta name="twitter:image" content="https://can-lee.github.io/deformmaster-web/static/images/teaser.png">
+    <meta name="twitter:title" content="PhysReal: Discovering Spatially Varying Hybrid Constitutive Fields for Real Deformable Objects">
+    <meta name="twitter:description" content="PhysReal couples 3DGS-based appearance with differentiable MPM physics to recover object-specific deformable dynamics from single-view interactive videos.">
+    <meta name="twitter:image" content="https://physreal.github.io/anonymous_web/static/images/figure1.png">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
-    <link rel="stylesheet" href="https://jpswalsh.github.io/academicons/css/academicons.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans">
     <link rel="stylesheet" href="static/css/index.css">
+    <script defer src="static/js/index.js"></script>
 </head>
 <body>
 
-<!-- ============================== HERO ============================== -->
-<section class="hero" style="padding-bottom: 0;">
-    <div class="hero-body" style="padding-bottom: 0;">
-        <div class="container is-max-desktop">
-            <div class="columns is-centered">
-                <div class="column has-text-centered">
-                    <h1 class="title is-1 publication-title">
-                        <span class="title-main">DeformMaster</span>
-                        <span class="title-subtitle">An Interactive Physics-Neural World Model for Deformable Objects from Videos</span>
-                    </h1>
-
-                    <div class="is-size-5 publication-authors">
-                        <span class="author-block">Can Li<sup>1,*</sup>,</span>
-                        <span class="author-block">Zhoujian Li<sup>2,*</sup>,</span>
-                        <span class="author-block"><a href="https://liren2515.github.io/" target="_blank" rel="noopener">Ren Li</a><sup>3</sup>,</span>
-                        <span class="author-block">Jie Gu<sup>4</sup>,</span>
-                        <span class="author-block">Lei Lei<sup>5,*</sup>,</span>
-                        <span class="author-block">Jingmin Chen<sup>4</sup>,</span>
-                        <span class="author-block">Lei Sun<sup>1</sup></span>
-                    </div>
-
-                    <div class="is-size-6 publication-authors">
-                        <span class="author-block"><sup>1</sup>Nankai University&nbsp;&nbsp;</span>
-                        <span class="author-block"><sup>2</sup>Zhejiang University&nbsp;&nbsp;</span>
-                        <span class="author-block"><sup>3</sup>Southern University of Science and Technology</span>
-                        <br>
-                        <span class="author-block"><sup>4</sup><a href="https://www.a4x.io/" target="_blank" rel="noopener">Rightly Robotics, A4X</a>&nbsp;&nbsp;</span>
-                        <span class="author-block"><sup>5</sup>University of Science and Technology of China</span>
-                    </div>
-                    <div class="is-size-7 publication-authors" style="margin-top: 0.4em;">
-                        <span class="author-block"><sup>*</sup>Interned at <a href="https://www.a4x.io/" target="_blank" rel="noopener">Rightly Robotics, A4X</a>.</span>
-                    </div>
-
-                    <div class="column has-text-centered">
-                        <div class="publication-links">
-                            <span class="link-block">
-                                <a href="https://arxiv.org/abs/2605.09586" class="external-link button is-normal is-rounded is-grey" target="_blank" rel="noopener">
-                                    <span class="icon"><i class="fas fa-file-pdf"></i></span>
-                                    <span>arXiv</span>
-                                </a>
-                            </span>
-                            <span class="link-block">
-                                <a href="https://github.com/CAN-Lee/DeformMaster" class="external-link button is-normal is-rounded is-grey" target="_blank" rel="noopener">
-                                    <span class="icon"><i class="fab fa-github"></i></span>
-                                    <span>Code</span>
-                                </a>
-                            </span>
-                            <span class="link-block">
-                                <a href="https://huggingface.co/datasets/Canlee/DeformMaster-Assets" class="external-link button is-normal is-rounded is-grey" target="_blank" rel="noopener">
-                                    <span class="icon"><img src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" alt="Hugging Face" style="height: 1em;"></span>
-                                    <span>Ckpt &amp; Data</span>
-                                </a>
-                            </span>
-                            <span class="link-block">
-                                <a href="#" class="external-link button is-normal is-rounded is-grey">
-                                    <span class="icon"><img src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" alt="Hugging Face" style="height: 1em;"></span>
-                                    <span>HF Space Demo (coming)</span>
-                                </a>
-                            </span>
-                            <span class="link-block">
-                                <a href="#bibtex" class="external-link button is-normal is-rounded is-grey">
-                                    <span class="icon"><i class="fas fa-quote-right"></i></span>
-                                    <span>BibTeX</span>
-                                </a>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<!-- ============================== STICKY NAVIGATION ============================== -->
+<nav class="sticky-nav" aria-label="Section navigation">
+    <div class="nav-inner">
+        <a class="nav-brand" href="#top">PhysReal</a>
+        <div class="nav-links">
+            <a href="#overview">Overview</a>
+            <a href="#abstract">Abstract</a>
+            <a href="#method">Method</a>
+            <a href="#results">Results</a>
+            <a href="#applications">Applications</a>
         </div>
     </div>
-</section>
+</nav>
 
-<!-- ============================== TEASER ============================== -->
-<section class="hero teaser" style="padding-top: 0;">
-    <div class="container is-max-desktop">
-        <div class="hero-body" style="padding-top: 0;">
-            <figure class="method-figure">
-                <img src="static/images/teaser_web.jpg" alt="DeformMaster teaser"
-                     style="max-width: 100%; height: auto; border-radius: 6px;">
-            </figure>
-            <h2 class="subtitle has-text-justified">
-                <strong>DeformMaster</strong> turns a phone-captured monocular video of deformable objects
-                into an online interactive world model. By recovering both underlying physics and
-                high-fidelity appearance, it supports long-horizon rollouts under novel actions,
-                material-parameter variation, and novel-view synthesis.
-            </h2>
-            <h2 class="title is-3 has-text-centered" style="margin-top: 2rem;">Online Interaction</h2>
-            <figure class="method-figure" style="margin-top: 1rem;">
-                <video src="static/videos/arxiv_web.mp4" autoplay muted controls loop playsinline preload="metadata"
-                       style="max-width: 100%; height: auto; border-radius: 6px;">
-                    Your browser does not support HTML5 video.
-                </video>
-            </figure>
+<!-- ============================== HERO ============================== -->
+<header class="hero-section" id="top">
+    <div class="hero-glow hero-glow-blue" aria-hidden="true"></div>
+    <div class="hero-glow hero-glow-cyan" aria-hidden="true"></div>
+    <div class="hero-glow hero-glow-violet" aria-hidden="true"></div>
+    <div class="hero-content">
+        <h1 class="publication-title">
+            <span class="title-main">PhysReal</span>
+            <span class="title-subtitle">Discovering Spatially Varying Hybrid Constitutive Fields for Real Deformable Objects</span>
+        </h1>
+        <p class="hero-authors">Anonymous Authors</p>
+    </div>
+</header>
 
-            <h3 class="title is-5 has-text-centered" style="margin-top: 2.5rem;">Novel action- and material-conditioned prediction</h3>
-            <p class="has-text-justified has-text-grey-dark" style="margin-bottom: 1rem;">
-                DeformMaster supports rollouts under novel actions and material-parameter variations, going beyond observations and baselines.
-            </p>
-            <div class="columns is-multiline is-mobile is-variable is-3">
-                <div class="column is-half-tablet is-full-mobile">
-                    <video src="static/videos/rope_video.mp4" autoplay muted loop playsinline preload="metadata" style="width: 100%; border-radius: 4px;"></video>
-                </div>
-                <div class="column is-half-tablet is-full-mobile">
-                    <video src="static/videos/sloth_video.mp4" autoplay muted loop playsinline preload="metadata" style="width: 100%; border-radius: 4px;"></video>
-                </div>
-            </div>
-
-            <p class="has-text-centered has-text-grey" style="margin-top: 0.75rem;">
-                More online interactive demo coming.
-            </p>
-        </div>
+<!-- ============================== OVERVIEW ============================== -->
+<section class="page-section section-overview" id="overview">
+    <div class="container-narrow">
+        <h2 class="section-title reveal">Overview</h2>
+        <figure class="figure-card reveal">
+            <img src="static/images/figure1.png" alt="PhysReal overview" loading="lazy">
+        </figure>
+        <p class="lead-text reveal">
+            <strong>PhysReal</strong> couples 3DGS-based appearance with differentiable MPM physics to
+            recover object-specific deformable dynamics from single-view interactive videos. By modeling
+            spatially varying hybrid expert-neural constitutive fields, PhysReal combines interpretable
+            physical priors with neural residuals, enabling accurate reconstruction, future prediction,
+            and downstream robotic applications.
+        </p>
     </div>
 </section>
 
 <!-- ============================== ABSTRACT ============================== -->
-<section class="section">
-    <div class="container is-max-desktop">
-        <div class="columns is-centered has-text-centered">
-            <div class="column is-four-fifths">
-                <h2 class="title is-3">Abstract</h2>
-                <div class="content has-text-justified">
-                    <p>
-                        World models for deformable objects should recover not only geometry and
-                        appearance, but also underlying physical dynamics, interaction grounding, and
-                        material behavior. Learning such a model from real videos is challenging because
-                        deformable linear, planar, and volumetric objects evolve under high-dimensional
-                        deformation, noisy interactions, and complex material response. The model must
-                        therefore infer a physical state from visual observations, roll it forward under
-                        new interactions, and render the resulting dynamics with high visual fidelity.
-                    </p>
-                    <p>
-                        We present <strong>DeformMaster</strong>, a video-derived interactive
-                        physics-neural world model that turns real interaction videos into an online
-                        interactive model of deformable objects within a unified
-                        dynamics-and-appearance framework. DeformMaster preserves structured physical
-                        rollout while using a neural residual to compensate for unmodeled effects, grounds
-                        sparse hand motion as distributed compliant actuators for hand-continuum
-                        interaction, represents material response with spatially varying constitutive
-                        experts, and drives high-fidelity 4D appearance from the predicted physical
-                        evolution. Experiments on real-world deformable-object sequences demonstrate
-                        DeformMaster's ability to roll out future dynamics and render dynamic appearance,
-                        outperforming state-of-the-art baselines while supporting novel action rollout,
-                        material-parameter variation, and dynamic novel-view synthesis.
-                    </p>
-                </div>
-            </div>
-        </div>
+<section class="page-section section-abstract" id="abstract">
+    <div class="container-abstract">
+        <h2 class="section-title reveal">Abstract</h2>
+        <p class="body-text reveal">
+            Learning physically plausible dynamics from visual observations is a fundamental capability
+            for interactive world models and embodied agents. However, real-world deformable objects are
+            particularly challenging in this setting, as their behaviors often arise from heterogeneous
+            and complex physical responses. To tackle this challenge, we introduce PhysReal, a novel
+            video-driven deformable object modeling and simulation framework. Specifically, we develop a
+            spatially varying hybrid expert-neural constitutive model integrated with the differentiable
+            MPM and 3DGS, where expert models provide interpretable physical priors and neural residuals
+            capture responses beyond analytical formulations. The constitutive field is represented by
+            spatially distributed patches, allowing continuous modeling of local material variations. We
+            further design a progressive curriculum learning strategy that gradually learns constitutive
+            behaviors from global properties to local variations and residual responses, together with a
+            unified motion-mask supervision scheme for learning from sparse visual observations. Extensive
+            experiments on diverse deformable object interactions demonstrate that PhysReal achieves
+            superior performance in dynamic reconstruction and future state prediction, while showing
+            strong potential for downstream robotic applications.
+        </p>
     </div>
 </section>
 
 <!-- ============================== METHOD ============================== -->
-<section class="section">
-    <div class="container is-max-desktop">
-        <div class="columns is-centered">
-            <div class="column is-full">
-                <h2 class="title is-3 has-text-centered">Method</h2>
-                <figure class="method-figure">
-                    <img src="static/images/method.png" alt="DeformMaster method overview">
-                </figure>
-                <div class="content has-text-justified">
-                    <p>
-                        DeformMaster learns a deformable-object world model from interaction videos by
-                        coupling interactive physics-neural dynamics with physics-grounded appearance.
-                        It integrates four components for stable dynamics rollout, robust hand-continuum
-                        interaction, heterogeneous material response, and high-fidelity rendering:
-                    </p>
-                    <ul>
-                        <li><strong>Physics-Neural Particle-Grid Dynamics (PNPGD).</strong>
-                            A differentiable MPM block advances the material-particle state over each
-                            frame, while a particle-grid neural residual estimates a residual velocity field
-                            from the post-MPM state and short motion history. This keeps rollout
-                            structured and stable while absorbing systematic real-world mismatch.</li>
-                        <li><strong>Distributed Compliant Actuators (DCA).</strong>
-                            Vision-derived hand tracks are treated as compliant actuator anchors rather
-                            than hard point constraints. Local actuator-particle couplings damp tracking
-                            noise and distribute forces over contact patches, yielding robust
-                            hand-continuum interaction.</li>
-                        <li><strong>Mixture of Constitutive Experts (MoCE).</strong>
-                            The stress response is represented as a spatially varying mixture of named
-                            constitutive laws, including Neo-Hookean, Corotated, and StVK experts. Patch
-                            expert weights and learnable material parameters let different regions express
-                            different deformation behavior.</li>
-                        <li><strong>Physics-grounded 4D appearance.</strong>
-                            Gaussian splats are incrementally deformed by the predicted material-particle
-                            trajectory using linear blend skinning. Rendering therefore stays aligned with
-                            physical motion without re-optimizing a separate dynamic appearance model for
-                            each new action.</li>
-                    </ul>
-                </div>
+<section class="page-section section-method" id="method">
+    <div class="container-narrow">
+        <h2 class="section-title reveal">Method</h2>
+        <figure class="figure-card reveal">
+            <img src="static/images/figure2.jpg" alt="PhysReal method pipeline" loading="lazy">
+        </figure>
+        <p class="lead-text reveal">
+            PhysReal consists of three key components. Interactive Video Parsing extracts temporally
+            consistent object masks, motion trajectories, and an object-centric 3D representation from
+            single-view interaction videos. Differentiable Physics Simulation couples MPM with a
+            spatially varying hybrid expert-neural constitutive model to capture heterogeneous material
+            responses. Finally, a progressive curriculum jointly leverages motion and mask supervision to
+            optimize global material properties, local constitutive variations, and neural residual
+            responses.
+        </p>
+
+        <div class="method-features reveal">
+            <div class="feature-card">
+                <div class="feature-number">01</div>
+                <h3 class="feature-title">Spatially Varying Hybrid Expert&ndash;Neural Constitutive Field</h3>
+                <p class="feature-text">
+                    PhysReal represents the object as a compact spatially varying constitutive field using
+                    distributed material patches. Each local region can express different material
+                    properties, while analytical expert models provide interpretable physical priors and
+                    neural constitutive residuals capture elastic and plastic responses beyond predefined
+                    formulations.
+                </p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-number">02</div>
+                <h3 class="feature-title">Progressive Constitutive Learning</h3>
+                <p class="feature-text">
+                    The optimization is progressively expanded from global expert parameters to
+                    patch-level spatial variations and finally neural constitutive residuals, following a
+                    <strong>Global &rarr; Local &rarr; Residual</strong> curriculum. This improves
+                    optimization stability while gradually increasing model expressiveness.
+                </p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-number">03</div>
+                <h3 class="feature-title">Motion&ndash;Mask Supervision</h3>
+                <p class="feature-text">
+                    Sparse tracked motion provides explicit temporal correspondence for dynamic fitting,
+                    while differentiable 3DGS-based mask supervision constrains dense object geometry and
+                    silhouette. Their complementary supervision enables robust physical property recovery
+                    from sparse visual observations.
+                </p>
             </div>
         </div>
     </div>
 </section>
 
 <!-- ============================== RESULTS ============================== -->
-<section class="section">
-    <div class="container is-max-desktop">
-        <h2 class="title is-3 has-text-centered">Results</h2>
-        <div class="content has-text-justified">
-            <p>
-                We evaluate DeformMaster on real-world deformable-object sequences spanning
-                linear (ropes), planar (cloths, packages), and volumetric (softbodied toys) objects.
-                <!--
-                The model outperforms state-of-the-art baselines on both dynamics metrics
-                (Chamfer distance, Track error, mask IoU) and appearance metrics (PSNR, SSIM, LPIPS),
-                and supports online interactive rollout, novel-action
-                rollout, material-parameter variation, and dynamic novel-view synthesis.
-                -->
+<section class="page-section section-results" id="results">
+    <div class="container-wide">
+        <h2 class="section-title reveal">Results</h2>
+        <p class="lead-text reveal">
+            We evaluate PhysReal on both the public PhysTwin dataset and a self-collected interaction
+            dataset. The PhysTwin dataset contains 22 interaction sequences covering deformable linear,
+            planar, and volumetric objects, while our dataset contains 6 interaction sequences involving
+            two stuffed toys and one cloth. For each sequence, the observed interval is used for physical
+            model identification and resimulation, while the remaining frames are reserved for future
+            state prediction.
+        </p>
+        <div class="results-sublinks reveal">
+            <a href="#qualitative">Qualitative Results</a>
+            <a href="#comparisons">Comparison with Baselines</a>
+            <a href="#quantitative">Quantitative Results</a>
+        </div>
+
+        <!-- ---------- Qualitative Results ---------- -->
+        <div class="results-subsection" id="qualitative">
+            <h3 class="subsection-title reveal">Qualitative Results</h3>
+            <p class="subsection-text reveal">
+                Qualitative results across the interaction sequences used in our evaluation.
             </p>
+            <div class="video-grid reveal" id="qualitative-grid"></div>
         </div>
 
-        <h3 class="title is-5 has-text-centered" style="margin-top: 2rem;">Qualitative results</h3>
-        <p class="has-text-justified has-text-grey-dark" style="margin-bottom: 1rem;">
-            Action-conditioned rollouts of DeformMaster on the deformable objects (from <a href="https://jianghanxiao.github.io/phystwin-web/" target="_blank" rel="noopener">PhysTwin</a>). Foreground: prediction; background: ground truth.
-        </p>
-        <div class="columns is-multiline is-mobile is-variable is-2">
-            <div class="column is-one-quarter-tablet is-half-mobile">
-                <video src="static/videos/results/double_lift_cloth_1_view0_bg_alpha06_white.mp4" autoplay muted loop playsinline preload="metadata" style="width: 100%; border-radius: 4px;"></video>
-                <p class="has-text-centered is-size-7" style="margin-top: 0.25rem;">double_lift_cloth_1</p>
+        <!-- ---------- Comparison with Baselines ---------- -->
+        <div class="results-subsection" id="comparisons">
+            <h3 class="subsection-title reveal">Comparison with Baselines</h3>
+            <p class="subsection-text reveal">
+                We compare PhysReal with four representative methods: GS-Dynamics, Spring-Gaus, PhysFlow,
+                and PhysTwin. For a fair comparison, all methods are evaluated under the same single-view
+                observation setting.
+            </p>
+            <div class="scene-selector reveal">
+                <label class="scene-selector-label" for="comparison-scene-select">Select Scene</label>
+                <select id="comparison-scene-select" aria-label="Select comparison scene"></select>
             </div>
-            <div class="column is-one-quarter-tablet is-half-mobile">
-                <video src="static/videos/results/double_lift_cloth_3_view0_bg_alpha06_white.mp4" autoplay muted loop playsinline preload="metadata" style="width: 100%; border-radius: 4px;"></video>
-                <p class="has-text-centered is-size-7" style="margin-top: 0.25rem;">double_lift_cloth_3</p>
-            </div>
-            <div class="column is-one-quarter-tablet is-half-mobile">
-                <video src="static/videos/results/double_lift_sloth_view0_bg_alpha06_white.mp4" autoplay muted loop playsinline preload="metadata" style="width: 100%; border-radius: 4px;"></video>
-                <p class="has-text-centered is-size-7" style="margin-top: 0.25rem;">double_lift_sloth</p>
-            </div>
-            <div class="column is-one-quarter-tablet is-half-mobile">
-                <video src="static/videos/results/double_lift_zebra_view0_bg_alpha06_white.mp4" autoplay muted loop playsinline preload="metadata" style="width: 100%; border-radius: 4px;"></video>
-                <p class="has-text-centered is-size-7" style="margin-top: 0.25rem;">double_lift_zebra</p>
-            </div>
-            <div class="column is-one-quarter-tablet is-half-mobile">
-                <video src="static/videos/results/double_stretch_sloth_view0_bg_alpha06_white.mp4" autoplay muted loop playsinline preload="metadata" style="width: 100%; border-radius: 4px;"></video>
-                <p class="has-text-centered is-size-7" style="margin-top: 0.25rem;">double_stretch_sloth</p>
-            </div>
-            <div class="column is-one-quarter-tablet is-half-mobile">
-                <video src="static/videos/results/double_stretch_zebra_view0_bg_alpha06_white.mp4" autoplay muted loop playsinline preload="metadata" style="width: 100%; border-radius: 4px;"></video>
-                <p class="has-text-centered is-size-7" style="margin-top: 0.25rem;">double_stretch_zebra</p>
-            </div>
-            <div class="column is-one-quarter-tablet is-half-mobile">
-                <video src="static/videos/results/single_clift_cloth_1_view0_bg_alpha06_white.mp4" autoplay muted loop playsinline preload="metadata" style="width: 100%; border-radius: 4px;"></video>
-                <p class="has-text-centered is-size-7" style="margin-top: 0.25rem;">single_clift_cloth_1</p>
-            </div>
-            <div class="column is-one-quarter-tablet is-half-mobile">
-                <video src="static/videos/results/single_clift_cloth_3_view0_bg_alpha06_white.mp4" autoplay muted loop playsinline preload="metadata" style="width: 100%; border-radius: 4px;"></video>
-                <p class="has-text-centered is-size-7" style="margin-top: 0.25rem;">single_clift_cloth_3</p>
-            </div>
-            <div class="column is-one-quarter-tablet is-half-mobile">
-                <video src="static/videos/results/single_lift_cloth_view0_bg_alpha06_white.mp4" autoplay muted loop playsinline preload="metadata" style="width: 100%; border-radius: 4px;"></video>
-                <p class="has-text-centered is-size-7" style="margin-top: 0.25rem;">single_lift_cloth</p>
-            </div>
-            <div class="column is-one-quarter-tablet is-half-mobile">
-                <video src="static/videos/results/single_lift_cloth_1_view0_bg_alpha06_white.mp4" autoplay muted loop playsinline preload="metadata" style="width: 100%; border-radius: 4px;"></video>
-                <p class="has-text-centered is-size-7" style="margin-top: 0.25rem;">single_lift_cloth_1</p>
-            </div>
-            <div class="column is-one-quarter-tablet is-half-mobile">
-                <video src="static/videos/results/single_lift_cloth_3_view0_bg_alpha06_white.mp4" autoplay muted loop playsinline preload="metadata" style="width: 100%; border-radius: 4px;"></video>
-                <p class="has-text-centered is-size-7" style="margin-top: 0.25rem;">single_lift_cloth_3</p>
-            </div>
-            <div class="column is-one-quarter-tablet is-half-mobile">
-                <video src="static/videos/results/single_lift_cloth_4_view0_bg_alpha06_white.mp4" autoplay muted loop playsinline preload="metadata" style="width: 100%; border-radius: 4px;"></video>
-                <p class="has-text-centered is-size-7" style="margin-top: 0.25rem;">single_lift_cloth_4</p>
-            </div>
-            <div class="column is-one-quarter-tablet is-half-mobile">
-                <video src="static/videos/results/single_lift_dinosor_view0_bg_alpha06_white.mp4" autoplay muted loop playsinline preload="metadata" style="width: 100%; border-radius: 4px;"></video>
-                <p class="has-text-centered is-size-7" style="margin-top: 0.25rem;">single_lift_dinosor</p>
-            </div>
-            <div class="column is-one-quarter-tablet is-half-mobile">
-                <video src="static/videos/results/single_lift_rope_view0_bg_alpha06_white.mp4" autoplay muted loop playsinline preload="metadata" style="width: 100%; border-radius: 4px;"></video>
-                <p class="has-text-centered is-size-7" style="margin-top: 0.25rem;">single_lift_rope</p>
-            </div>
-            <div class="column is-one-quarter-tablet is-half-mobile">
-                <video src="static/videos/results/single_lift_sloth_view0_bg_alpha06_white.mp4" autoplay muted loop playsinline preload="metadata" style="width: 100%; border-radius: 4px;"></video>
-                <p class="has-text-centered is-size-7" style="margin-top: 0.25rem;">single_lift_sloth</p>
-            </div>
-            <div class="column is-one-quarter-tablet is-half-mobile">
-                <video src="static/videos/results/single_lift_zebra_view0_bg_alpha06_white.mp4" autoplay muted loop playsinline preload="metadata" style="width: 100%; border-radius: 4px;"></video>
-                <p class="has-text-centered is-size-7" style="margin-top: 0.25rem;">single_lift_zebra</p>
-            </div>
-            <div class="column is-one-quarter-tablet is-half-mobile">
-                <video src="static/videos/results/single_push_rope_view0_bg_alpha06_white.mp4" autoplay muted loop playsinline preload="metadata" style="width: 100%; border-radius: 4px;"></video>
-                <p class="has-text-centered is-size-7" style="margin-top: 0.25rem;">single_push_rope</p>
-            </div>
-            <div class="column is-one-quarter-tablet is-half-mobile">
-                <video src="static/videos/results/single_push_rope_1_view0_bg_alpha06_white.mp4" autoplay muted loop playsinline preload="metadata" style="width: 100%; border-radius: 4px;"></video>
-                <p class="has-text-centered is-size-7" style="margin-top: 0.25rem;">single_push_rope_1</p>
-            </div>
-            <div class="column is-one-quarter-tablet is-half-mobile">
-                <video src="static/videos/results/single_push_sloth_view0_bg_alpha06_white.mp4" autoplay muted loop playsinline preload="metadata" style="width: 100%; border-radius: 4px;"></video>
-                <p class="has-text-centered is-size-7" style="margin-top: 0.25rem;">single_push_sloth</p>
-            </div>
-            <div class="column is-one-quarter-tablet is-half-mobile">
-                <video src="static/videos/results/weird_package_view0_bg_alpha06_white.mp4" autoplay muted loop playsinline preload="metadata" style="width: 100%; border-radius: 4px;"></video>
-                <p class="has-text-centered is-size-7" style="margin-top: 0.25rem;">weird_package</p>
-            </div>
+            <p class="scene-ui-hint reveal">
+                Select an interaction sequence to compare Ground Truth, PhysReal, and the four baselines.
+            </p>
+            <h4 class="scene-current reveal" id="comparison-scene-title">rope_double_hand</h4>
+            <div class="comparison-grid reveal" id="comparison-grid"></div>
         </div>
 
-        <h3 class="title is-5 has-text-centered" style="margin-top: 2.5rem;">Comparisons</h3>
-        <p class="has-text-justified has-text-grey-dark" style="margin-bottom: 1rem;">
-            Side-by-side comparisons between a baseline and DeformMaster on representative deformable-object sequences.
-        </p>
-        <div class="columns is-mobile is-variable is-3" style="margin-bottom: 0;">
-            <div class="column is-half has-text-centered"><strong>Baseline (<a href="https://jianghanxiao.github.io/phystwin-web/" target="_blank" rel="noopener">PhysTwin</a>)</strong></div>
-            <div class="column is-half has-text-centered"><strong>Ours</strong></div>
-        </div>
-        <div class="columns is-multiline is-mobile is-variable is-3">
-            <div class="column is-half">
-                <video src="static/videos/baselines/double_lift_zebra_view0_bg_alpha06_white.mp4" autoplay muted loop playsinline preload="metadata" style="width: 100%; border-radius: 4px;"></video>
-                <p class="has-text-centered is-size-7" style="margin-top: 0.25rem;">double_lift_zebra</p>
-            </div>
-            <div class="column is-half">
-                <video src="static/videos/results/double_lift_zebra_view0_bg_alpha06_white.mp4" autoplay muted loop playsinline preload="metadata" style="width: 100%; border-radius: 4px;"></video>
-                <p class="has-text-centered is-size-7" style="margin-top: 0.25rem;">double_lift_zebra</p>
-            </div>
-            <div class="column is-half">
-                <video src="static/videos/baselines/double_lift_sloth_view0_bg_alpha06_white.mp4" autoplay muted loop playsinline preload="metadata" style="width: 100%; border-radius: 4px;"></video>
-                <p class="has-text-centered is-size-7" style="margin-top: 0.25rem;">double_lift_sloth</p>
-            </div>
-            <div class="column is-half">
-                <video src="static/videos/results/double_lift_sloth_view0_bg_alpha06_white.mp4" autoplay muted loop playsinline preload="metadata" style="width: 100%; border-radius: 4px;"></video>
-                <p class="has-text-centered is-size-7" style="margin-top: 0.25rem;">double_lift_sloth</p>
-            </div>
-        </div>
+        <!-- ---------- Quantitative Results ---------- -->
+        <div class="results-subsection" id="quantitative">
+            <h3 class="subsection-title reveal">Quantitative Results</h3>
+            <p class="subsection-text reveal">
+                We evaluate both 3D and 2D physical dynamics using four metrics: Chamfer Distance
+                (CD &darr;), Track Error (Track &darr;), Intersection-over-Union (IoU &uarr;), and Peak
+                Signal-to-Noise Ratio (PSNR &uarr;).
+            </p>
 
-        <h3 class="title is-5 has-text-centered" style="margin-top: 2.5rem;">Per-category dynamics prediction</h3>
-        <p class="has-text-justified has-text-grey-dark" style="margin-bottom: 1rem;">
-            Per-category dynamics prediction on the PhysTwin sequences (n=20), grouped into deformable
-            <em>linear</em>, <em>planar</em>, and <em>volumetric</em> objects.
-        </p>
-        <div class="table-container" style="overflow-x: auto;">
-            <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth has-text-centered">
+            <div class="quant-inner">
+            <h4 class="table-subtitle reveal">PhysTwin Dataset</h4>
+        <div class="table-wrapper reveal">
+            <table class="quant-table">
+                <caption>Quantitative comparison on the PhysTwin dataset.</caption>
                 <thead>
                     <tr>
-                        <th rowspan="2" class="has-text-centered">Method</th>
-                        <th colspan="3" class="has-text-centered">Linear (n=3)</th>
-                        <th colspan="3" class="has-text-centered">Planar (n=9)</th>
-                        <th colspan="3" class="has-text-centered">Volumetric (n=8)</th>
+                        <th rowspan="2" class="col-method">Method</th>
+                        <th colspan="4" class="group-header">Training</th>
+                        <th colspan="4" class="group-header group-sep">Testing</th>
                     </tr>
                     <tr>
-                        <th>IoU&nbsp;&uarr;</th>
-                        <th>Chamfer&nbsp;&darr;</th>
-                        <th>Track&nbsp;&darr;</th>
-                        <th>IoU&nbsp;&uarr;</th>
-                        <th>Chamfer&nbsp;&darr;</th>
-                        <th>Track&nbsp;&darr;</th>
-                        <th>IoU&nbsp;&uarr;</th>
-                        <th>Chamfer&nbsp;&darr;</th>
-                        <th>Track&nbsp;&darr;</th>
+                        <th>CD &darr;</th>
+                        <th>Track &darr;</th>
+                        <th>IoU &uarr;</th>
+                        <th>PSNR &uarr;</th>
+                        <th class="group-sep">CD &darr;</th>
+                        <th>Track &darr;</th>
+                        <th>IoU &uarr;</th>
+                        <th>PSNR &uarr;</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="has-text-left">PhysTwin</td>
-                        <td>0.658</td><td>0.007</td><td>0.013</td>
-                        <td>0.738</td><td>0.013</td><td><strong>0.028</strong></td>
-                        <td>0.748</td><td>0.013</td><td>0.021</td>
+                        <td class="col-method">GS-Dynamics</td>
+                        <td>0.018</td><td>0.027</td><td>67.34</td><td>25.92</td>
+                        <td class="group-sep">0.054</td><td>0.081</td><td>37.77</td><td>21.47</td>
                     </tr>
                     <tr>
-                        <td class="has-text-left"><strong>DeformMaster (ours)</strong></td>
-                        <td><strong>0.721</strong></td><td><strong>0.005</strong></td><td><strong>0.010</strong></td>
-                        <td><strong>0.748</strong></td><td><strong>0.013</strong></td><td>0.032</td>
-                        <td><strong>0.756</strong></td><td><strong>0.012</strong></td><td><strong>0.020</strong></td>
+                        <td class="col-method">Spring-Gaus</td>
+                        <td>0.016</td><td>0.027</td><td>74.35</td><td>27.59</td>
+                        <td class="group-sep">0.034</td><td>0.062</td><td>51.32</td><td>23.79</td>
+                    </tr>
+                    <tr>
+                        <td class="col-method">PhysFlow</td>
+                        <td>0.010</td><td>0.017</td><td>78.80</td><td>27.88</td>
+                        <td class="group-sep">0.017</td><td>0.034</td><td>62.20</td><td>24.42</td>
+                    </tr>
+                    <tr>
+                        <td class="col-method">PhysTwin</td>
+                        <td>0.011</td><td><strong>0.013</strong></td><td>80.90</td><td>27.83</td>
+                        <td class="group-sep">0.017</td><td><strong>0.027</strong></td><td>65.79</td><td>24.87</td>
+                    </tr>
+                    <tr class="row-ours">
+                        <td class="col-method">PhysReal</td>
+                        <td><strong>0.008</strong></td><td>0.014</td><td><strong>86.84</strong></td><td><strong>28.98</strong></td>
+                        <td class="group-sep"><strong>0.015</strong></td><td><strong>0.027</strong></td><td><strong>75.12</strong></td><td><strong>26.53</strong></td>
                     </tr>
                 </tbody>
             </table>
         </div>
 
+            <h4 class="table-subtitle reveal">Self-collected Dataset</h4>
+        <div class="table-wrapper reveal">
+            <table class="quant-table">
+                <caption>Quantitative comparison on the self-collected dataset.</caption>
+                <thead>
+                    <tr>
+                        <th rowspan="2" class="col-method">Method</th>
+                        <th colspan="4" class="group-header">Training</th>
+                        <th colspan="4" class="group-header group-sep">Testing</th>
+                    </tr>
+                    <tr>
+                        <th>CD &darr;</th>
+                        <th>Track &darr;</th>
+                        <th>IoU &uarr;</th>
+                        <th>PSNR &uarr;</th>
+                        <th class="group-sep">CD &darr;</th>
+                        <th>Track &darr;</th>
+                        <th>IoU &uarr;</th>
+                        <th>PSNR &uarr;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="col-method">GS-Dynamics</td>
+                        <td>0.000</td><td>0.000</td><td>0.00</td><td>0.00</td>
+                        <td class="group-sep">0.000</td><td>0.000</td><td>0.00</td><td>0.00</td>
+                    </tr>
+                    <tr>
+                        <td class="col-method">Spring-Gaus</td>
+                        <td>0.016</td><td>0.026</td><td>82.72</td><td>22.23</td>
+                        <td class="group-sep">0.034</td><td>0.063</td><td>61.52</td><td>17.21</td>
+                    </tr>
+                    <tr>
+                        <td class="col-method">PhysFlow</td>
+                        <td>0.010</td><td>0.018</td><td>79.84</td><td>21.17</td>
+                        <td class="group-sep">0.015</td><td>0.034</td><td>64.65</td><td>16.99</td>
+                    </tr>
+                    <tr>
+                        <td class="col-method">PhysTwin</td>
+                        <td>0.022</td><td>0.025</td><td>74.84</td><td>19.45</td>
+                        <td class="group-sep">0.030</td><td>0.043</td><td>60.80</td><td>16.30</td>
+                    </tr>
+                    <tr class="row-ours">
+                        <td class="col-method">PhysReal</td>
+                        <td><strong>0.008</strong></td><td><strong>0.010</strong></td><td><strong>90.32</strong></td><td><strong>23.80</strong></td>
+                        <td class="group-sep"><strong>0.012</strong></td><td><strong>0.020</strong></td><td><strong>80.00</strong></td><td><strong>19.70</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-        <p class="has-text-centered has-text-grey" style="margin-top: 2rem;">
-            More quantitative results, qualitative results, ablations, and an interactive online playground will be released here.
+            <p class="lead-text reveal quant-summary">
+                PhysReal achieves the best CD, IoU, and PSNR on the PhysTwin dataset for both
+                resimulation and future prediction, while achieving the best overall performance across
+                all reported metrics on the self-collected dataset.
+            </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================== DOWNSTREAM APPLICATIONS ============================== -->
+<section class="page-section section-applications" id="applications">
+    <div class="container-narrow">
+        <h2 class="section-title reveal">Downstream Applications</h2>
+        <p class="lead-text reveal">
+            Beyond reconstruction and prediction, the recovered physical model supports a range of
+            downstream applications, including interactive simulation, embodied data generation,
+            real-time physical digital twins, and model-based manipulation.
         </p>
+
+        <div class="application-block reveal">
+            <div class="application-header">
+                <span class="application-number">01</span>
+                <h3 class="subsection-title application-title">Interactive Simulation</h3>
+            </div>
+            <p class="subsection-text application-text">
+                PhysReal supports interactive simulation of novel manipulation trajectories. Users can
+                directly manipulate the recovered object and observe its predicted deformation without
+                retraining or additional optimization.
+            </p>
+            <!-- FUTURE MEDIA: INTERACTIVE SIMULATION -->
+        </div>
+
+        <div class="application-block reveal">
+            <div class="application-header">
+                <span class="application-number">02</span>
+                <h3 class="subsection-title application-title">Embodied Data Generation</h3>
+            </div>
+            <p class="subsection-text application-text">
+                PhysReal uses privileged particle states to identify reliable grasping and interaction
+                targets across diverse object configurations. Combined with realistic 3DGS rendering, it
+                enables scalable generation of paired visual observations and robot actions.
+            </p>
+            <!-- CURRENT MEDIA: EMBODIED DATA GENERATION -->
+            <div class="data-gen-grid" id="data-generation-grid"></div>
+        </div>
+
+        <div class="application-block reveal">
+            <div class="application-header">
+                <span class="application-number">03</span>
+                <h3 class="subsection-title application-title">Real-time Physical Digital Twin</h3>
+            </div>
+            <p class="subsection-text application-text">
+                PhysReal jointly reconstructs the environment, robot, and deformable objects to create a
+                physics-grounded digital twin. Its coupled 3DGS-MPM representation synchronizes visual
+                and physical states for real-time monitoring and simulation of workspace interactions.
+            </p>
+            <!-- FUTURE MEDIA: REAL-TIME PHYSICAL DIGITAL TWIN -->
+        </div>
+
+        <div class="application-block reveal">
+            <div class="application-header">
+                <span class="application-number">04</span>
+                <h3 class="subsection-title application-title">Model-based Manipulation</h3>
+            </div>
+            <p class="subsection-text application-text">
+                PhysReal provides a forward dynamics model for model predictive control (MPC). Given a
+                target configuration, MPC evaluates candidate actions through simulation and optimizes
+                the robot trajectory to achieve the desired object state.
+            </p>
+            <!-- FUTURE MEDIA: MODEL-BASED MANIPULATION -->
+        </div>
     </div>
 </section>
 
-<!-- ============================== ACKNOWLEDGMENT ============================== -->
-<section class="section" id="acknowledgment">
-    <div class="container is-max-desktop">
-        <h2 class="title is-3">Acknowledgment</h2>
-        <p>
-            This work was done during an internship at
-            <a href="https://www.a4x.io/" target="_blank" rel="noopener">Rightly Robotics, A4X</a>.
-            We thank the authors of
-            <a href="https://jianghanxiao.github.io/phystwin-web/" target="_blank" rel="noopener">PhysTwin</a>,
-            <a href="https://kywind.github.io/pgnd" target="_blank" rel="noopener">PGND</a>, and
-            <a href="https://github.com/graphdeco-inria/gaussian-splatting" target="_blank" rel="noopener">3D Gaussian Splatting</a>.
-        </p>
-    </div>
-</section>
-
-<!-- ============================== BIBTEX ============================== -->
-<section class="section bibtex-block" id="bibtex">
-    <div class="container is-max-desktop">
-        <h2 class="title is-3">BibTeX</h2>
-        <pre><code>@article{li2026deformmaster,
-      title={DeformMaster: An Interactive Physics-Neural World Model for Deformable Objects from Videos},
-      author={Can Li and Zhoujian Li and Ren Li and Jie Gu and Lei Lei and Jingmin Chen and Lei Sun},
-      year={2026},
-      eprint={2605.09586},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV},
-      url={https://arxiv.org/abs/2605.09586},
-}</code></pre>
-    </div>
-</section>
+<!-- FUTURE SECTION: ABLATION STUDIES -->
+<!-- FUTURE SECTION: GENERALIZATION TO UNSEEN INTERACTIONS -->
+<!-- FUTURE SECTION: ROBOTIC APPLICATIONS -->
 
 <!-- ============================== FOOTER ============================== -->
-<footer>
+<footer class="site-footer">
     <p>
         Page template adapted from
-        <a href="https://github.com/nerfies/nerfies.github.io" target="_blank">Nerfies</a>;
+        <a href="https://github.com/nerfies/nerfies.github.io" target="_blank" rel="noopener">Nerfies</a>;
         source code released under the
-        <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC&nbsp;BY-SA&nbsp;4.0</a>
+        <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC&nbsp;BY-SA&nbsp;4.0</a>
         license.
     </p>
 </footer>
