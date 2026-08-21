@@ -119,14 +119,6 @@
 <section class="page-section section-results" id="results">
     <div class="container-wide">
         <h2 class="section-title reveal">Results</h2>
-        <p class="lead-text reveal">
-            We evaluate PhysReal on both the public PhysTwin dataset and a self-collected interaction
-            dataset. The PhysTwin dataset contains 22 interaction sequences covering deformable linear,
-            planar, and volumetric objects, while our dataset contains 6 interaction sequences involving
-            two stuffed toys and one cloth. For each sequence, the observed interval is used for physical
-            model identification and resimulation, while the remaining frames are reserved for future
-            state prediction.
-        </p>
         <div class="results-sublinks reveal">
             <a href="#qualitative">Qualitative Results</a>
             <a href="#comparisons">Comparison with Baselines</a>
@@ -153,9 +145,6 @@
                 <label class="scene-selector-label" for="comparison-scene-select">Select Scene</label>
                 <select id="comparison-scene-select" aria-label="Select comparison scene"></select>
             </div>
-            <p class="scene-ui-hint reveal">
-                Select an interaction sequence to compare Ground Truth, PhysReal, and the four baselines.
-            </p>
             <h4 class="scene-current reveal" id="comparison-scene-title">rope_double_hand</h4>
             <div class="comparison-grid reveal" id="comparison-grid"></div>
         </div>
