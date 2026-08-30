@@ -35,16 +35,63 @@ var qualitativeVideos = [
     "weird_package.mp4"
 ];
 
-var DATA_GEN_DIR = "static/videos/data_gen/";
-
-// Add future embodied data generation videos here
-var dataGenerationVideos = [
-    "cloth_gen_1.mp4",
-    "cloth_gen_2.mp4",
-    "panda_gen_1.mp4",
-    "panda_gen_2.mp4",
-    "sloth_gen_1.mp4",
-    "sloth_gen_2.mp4"
+/* Downstream Applications: one entry per application subsection.
+   Videos inside each section are listed in display order: object priority
+   Panda -> Cloth -> Sloth, then natural numeric order within the same object.
+   File names verified on disk; never rename real files. Add future videos here. */
+var applicationSections = [
+    {
+        id: "interactive-simulation",
+        title: "Interactive Simulation",
+        dir: "static/videos/applications/interactive/",
+        videos: [
+            "panda_inter_1.mp4",
+            "panda_inter_2.mp4",
+            "cloth_inter_1.mp4",
+            "cloth_inter_2.mp4",
+            "sloth_inter_1.mp4",
+            "sloth_inter_2.mp4"
+        ]
+    },
+    {
+        id: "embodied-data-generation",
+        title: "Embodied Data Generation",
+        dir: "static/videos/data_gen/",
+        videos: [
+            "panda_gen_1.mp4",
+            "panda_gen_2.mp4",
+            "cloth_gen_1.mp4",
+            "cloth_gen_2.mp4",
+            "sloth_gen_1.mp4",
+            "sloth_gen_2.mp4"
+        ]
+    },
+    {
+        id: "physical-digital-twin",
+        title: "Real-time Physical Digital Twin",
+        dir: "static/videos/applications/twin/",
+        videos: [
+            "panda_twin_1.mp4",
+            "panda_twin_2.mp4",
+            "cloth_twin_1.mp4",
+            "cloth_twin_2.mp4",
+            "sloth_twin_1.mp4",
+            "sloth_twin_2.mp4"
+        ]
+    },
+    {
+        id: "model-based-manipulation",
+        title: "Model-based Manipulation",
+        dir: "static/videos/applications/MPC/",
+        videos: [
+            "panda_mpc_1.mp4",
+            "panda_mpc_2.mp4",
+            "cloth_mpc_1.mp4",
+            "cloth_mpc_2.mp4",
+            "sloth_mpc_1.mp4",
+            "sloth_mpc_2.mp4"
+        ]
+    }
 ];
 
 /* Comparison: fixed display order of the six methods. */
@@ -128,25 +175,47 @@ function renderQualitative() {
     });
 }
 
-/* Embodied Data Generation carousel: manual paging with wrap-around.
+/* Application carousels: one shared implementation, independent state per section.
    perPage = 2 on desktop, 1 on mobile. Only videos on the active page get a
    src (preload="metadata"); switching pages pauses the previous ones. */
-var dataGenState = { pageIndex: 0 };
+var APP_OBJECT_PRIORITY = { panda: 0, cloth: 1, sloth: 2 };
 
-function dataGenPerPage() {
+function appObjectPriority(filename) {
+    var m = filename.toLowerCase().match(/panda|cloth|sloth/);
+    return m ? APP_OBJECT_PRIORITY[m[0]] : 99;
+}
+
+function appObjectNumber(filename) {
+    var m = filename.match(/(\d+)\.mp4$/i);
+    return m ? parseInt(m[1], 10) : 0;
+}
+
+/* Re-asserts Panda -> Cloth -> Sloth, then natural numeric order (1, 2, ... 10). */
+function sortApplicationVideos(videos) {
+    return videos.slice().sort(function (a, b) {
+        var pa = appObjectPriority(a);
+        var pb = appObjectPriority(b);
+        if (pa !== pb) { return pa - pb; }
+        var na = appObjectNumber(a);
+        var nb = appObjectNumber(b);
+        if (na !== nb) { return na - nb; }
+        return a < b ? -1 : (a > b ? 1 : 0);
+    });
+}
+
+function appCarouselPerPage() {
     return (window.matchMedia && window.matchMedia("(max-width: 600px)").matches) ? 1 : 2;
 }
 
-function dataGenPageCount() {
-    return Math.max(1, Math.ceil(dataGenerationVideos.length / dataGenPerPage()));
-}
+function createAppSlide(dir, filename) {
+    var slide = document.createElement("div");
+    slide.className = "carousel-slide";
 
-function createDataGenCard(filename) {
     var card = document.createElement("div");
     card.className = "video-card data-gen-card";
 
     var video = document.createElement("video");
-    video.dataset.carouselSrc = DATA_GEN_DIR + filename;
+    video.dataset.carouselSrc = dir + filename;
     video.muted = true;
     video.setAttribute("muted", "");
     video.setAttribute("autoplay", "");
@@ -159,47 +228,60 @@ function createDataGenCard(filename) {
     label.className = "video-caption";
     label.textContent = stripExtension(filename);
     card.appendChild(label);
-    return card;
+
+    slide.appendChild(card);
+    return slide;
 }
 
-function buildDataGenCarousel() {
-    var track = document.getElementById("data-gen-track");
-    if (!track) { return; }
-    dataGenerationVideos.forEach(function (filename) {
-        var slide = document.createElement("div");
-        slide.className = "carousel-slide";
-        slide.appendChild(createDataGenCard(filename));
-        track.appendChild(slide);
-    });
+function buildAppCarousels() {
+    applicationSections.forEach(function (section) {
+        var root = document.getElementById("carousel-" + section.id);
+        if (!root) { return; }
+        var track = root.querySelector(".carousel-track");
+        if (!track) { return; }
 
-    var prev = document.getElementById("data-gen-prev");
-    var next = document.getElementById("data-gen-next");
-    if (prev) {
-        prev.addEventListener("click", function () { moveDataGen(-1); });
-    }
-    if (next) {
-        next.addEventListener("click", function () { moveDataGen(1); });
-    }
+        root._videos = sortApplicationVideos(section.videos);
+        root._pageIndex = 0;
+        root._videos.forEach(function (filename) {
+            track.appendChild(createAppSlide(section.dir, filename));
+        });
+
+        var prev = root.querySelector(".carousel-prev");
+        var next = root.querySelector(".carousel-next");
+        if (prev) {
+            prev.addEventListener("click", function () { moveAppCarousel(root, -1); });
+        }
+        if (next) {
+            next.addEventListener("click", function () { moveAppCarousel(root, 1); });
+        }
+
+        layoutAppCarousel(root);
+    });
 
     var resizeTimer = null;
     window.addEventListener("resize", function () {
         if (resizeTimer) { window.clearTimeout(resizeTimer); }
-        resizeTimer = window.setTimeout(layoutDataGen, 120);
+        resizeTimer = window.setTimeout(function () {
+            document.querySelectorAll(".app-carousel").forEach(layoutAppCarousel);
+        }, 120);
     });
-
-    layoutDataGen();
 }
 
-function layoutDataGen() {
-    var viewport = document.getElementById("data-gen-viewport");
-    var track = document.getElementById("data-gen-track");
+function appCarouselPageCount(root) {
+    return Math.max(1, Math.ceil(root._videos.length / appCarouselPerPage()));
+}
+
+function layoutAppCarousel(root) {
+    var viewport = root.querySelector(".carousel-viewport");
+    var track = root.querySelector(".carousel-track");
     if (!viewport || !track) { return; }
 
-    var perPage = dataGenPerPage();
-    var pages = dataGenPageCount();
-    if (dataGenState.pageIndex >= pages) {
-        dataGenState.pageIndex = pages - 1;
+    var perPage = appCarouselPerPage();
+    var pages = appCarouselPageCount(root);
+    if (root._pageIndex >= pages) {
+        root._pageIndex = pages - 1;
     }
+    root.classList.toggle("is-single-page", pages <= 1);
 
     var gap = parseFloat(window.getComputedStyle(track).gap) || 24;
     var viewportW = viewport.clientWidth;
@@ -207,18 +289,17 @@ function layoutDataGen() {
     Array.prototype.forEach.call(track.children, function (slide) {
         slide.style.width = slideW + "px";
     });
-    track.style.transform = "translateX(" + (-dataGenState.pageIndex * viewportW) + "px)";
+    track.style.transform = "translateX(" + (-root._pageIndex * viewportW) + "px)";
 
-    activateDataGenPage();
-    renderDataGenDots();
+    activateAppCarouselPage(root);
+    renderAppCarouselDots(root);
 }
 
-function activateDataGenPage() {
-    var track = document.getElementById("data-gen-track");
-    if (!track) { return; }
-    var perPage = dataGenPerPage();
-    var start = dataGenState.pageIndex * perPage;
-    var end = Math.min(start + perPage, dataGenerationVideos.length);
+function activateAppCarouselPage(root) {
+    var track = root.querySelector(".carousel-track");
+    var perPage = appCarouselPerPage();
+    var start = root._pageIndex * perPage;
+    var end = Math.min(start + perPage, root._videos.length);
     Array.prototype.forEach.call(track.children, function (slide, i) {
         var video = slide.querySelector("video");
         if (!video) { return; }
@@ -237,16 +318,16 @@ function activateDataGenPage() {
     });
 }
 
-function moveDataGen(direction) {
-    var pages = dataGenPageCount();
-    dataGenState.pageIndex = (dataGenState.pageIndex + direction + pages) % pages;
-    layoutDataGen();
+function moveAppCarousel(root, direction) {
+    var pages = appCarouselPageCount(root);
+    root._pageIndex = (root._pageIndex + direction + pages) % pages;
+    layoutAppCarousel(root);
 }
 
-function renderDataGenDots() {
-    var dots = document.getElementById("data-gen-dots");
+function renderAppCarouselDots(root) {
+    var dots = root.querySelector(".carousel-dots");
     if (!dots) { return; }
-    var pages = dataGenPageCount();
+    var pages = appCarouselPageCount(root);
     if (dots.children.length !== pages) {
         dots.innerHTML = "";
         for (var i = 0; i < pages; i++) {
@@ -256,15 +337,15 @@ function renderDataGenDots() {
             dot.setAttribute("aria-label", "Go to page " + (i + 1));
             (function (idx) {
                 dot.addEventListener("click", function () {
-                    dataGenState.pageIndex = idx;
-                    layoutDataGen();
+                    root._pageIndex = idx;
+                    layoutAppCarousel(root);
                 });
             })(i);
             dots.appendChild(dot);
         }
     }
     Array.prototype.forEach.call(dots.children, function (dot, i) {
-        dot.classList.toggle("active", i === dataGenState.pageIndex);
+        dot.classList.toggle("active", i === root._pageIndex);
     });
 }
 
@@ -402,7 +483,7 @@ function setupReveal() {
 
 function init() {
     renderQualitative();
-    buildDataGenCarousel();
+    buildAppCarousels();
     buildComparisonGrid();
     renderSceneSelect();
     switchComparisonScene(DEFAULT_SCENE, true);
@@ -411,7 +492,9 @@ function init() {
     console.log("[PhysReal] qualitative videos: " + qualitativeVideos.length + "/28");
     console.log("[PhysReal] comparison scene mappings: " +
         (comparisonScenes.length * comparisonMethodOrder.length) + "/54");
-    console.log("[PhysReal] data generation videos: " + dataGenerationVideos.length + "/6");
+    var appVideoTotal = applicationSections.reduce(function (sum, s) { return sum + s.videos.length; }, 0);
+    console.log("[PhysReal] application videos: " + appVideoTotal + "/24 across " +
+        applicationSections.length + " sections");
 }
 
 init();
