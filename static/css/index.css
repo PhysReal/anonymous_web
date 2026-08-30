@@ -530,7 +530,7 @@ section[id] {
     background: var(--gradient-brand);
 }
 
-/* ============ Downstream Applications (Embodied Data Generation carousel) ============ */
+/* ============ Downstream Applications (shared carousel) ============ */
 .section-applications {
     background: var(--bg);
 }
@@ -539,11 +539,14 @@ section[id] {
     margin-top: 2.75rem;
 }
 
-.data-gen-carousel {
+.app-carousel {
+    margin-top: 2.1rem;
+}
+
+.carousel-row {
     display: flex;
     align-items: center;
     gap: 1rem;
-    margin-top: 2.1rem;
 }
 
 .carousel-viewport {
@@ -562,9 +565,14 @@ section[id] {
     flex: 0 0 auto;
 }
 
-.data-gen-card .video-caption {
+.app-carousel .video-caption {
     font-size: 0.78rem;
     padding: 0.65rem 0.75rem;
+}
+
+.app-carousel.is-single-page .carousel-btn,
+.app-carousel.is-single-page .carousel-dots {
+    display: none;
 }
 
 .carousel-btn {
@@ -685,7 +693,7 @@ body.js-enabled .reveal:not(.revealed) {
         grid-template-columns: 1fr;
     }
 
-    .data-gen-carousel {
+    .carousel-row {
         gap: 0.6rem;
     }
 
