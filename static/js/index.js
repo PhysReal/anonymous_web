@@ -1,38 +1,45 @@
 /* PhysReal project page — data-driven rendering and interaction.
    Plain script (no modules, no fetch) so the page works over file://. */
 
-var QUALITATIVE_DIR = "static/videos/physreal/";
+var QUALITATIVE_PHYSTWIN_DIR = "static/videos/physreal/";
+var QUALITATIVE_SELF_DIR = "static/videos/新视频/";
 
-// Add future PhysReal qualitative videos here
+/* 32 PhysReal qualitative results: 22 PhysTwin (original public order) then
+   10 self-collected (Rope -> Cloth -> Panda -> Sloth). Directory names are
+   used as-is; encodeURI is applied when assigning video src. */
 var qualitativeVideos = [
-    "0726_single_lift_sloth_03.mp4",
-    "0726_single_pull_sloth_03.mp4",
-    "0728_double_lift_panda_03.mp4",
-    "0728_single_lift_panda_03.mp4",
-    "0730_double_lift_cloth.mp4",
-    "0730_single_clift_cloth.mp4",
-    "double_lift_cloth_1.mp4",
-    "double_lift_cloth_3.mp4",
-    "double_lift_sloth.mp4",
-    "double_lift_zebra.mp4",
-    "double_stretch_sloth.mp4",
-    "double_stretch_zebra.mp4",
-    "rope_double_hand.mp4",
-    "single_clift_cloth_1.mp4",
-    "single_clift_cloth_3.mp4",
-    "single_lift_cloth.mp4",
-    "single_lift_cloth_1.mp4",
-    "single_lift_cloth_3.mp4",
-    "single_lift_cloth_4.mp4",
-    "single_lift_dinosor.mp4",
-    "single_lift_rope.mp4",
-    "single_lift_sloth.mp4",
-    "single_lift_zebra.mp4",
-    "single_push_rope.mp4",
-    "single_push_rope_1.mp4",
-    "single_push_rope_4.mp4",
-    "single_push_sloth.mp4",
-    "weird_package.mp4"
+    { dir: QUALITATIVE_PHYSTWIN_DIR, file: "double_lift_cloth_1.mp4" },
+    { dir: QUALITATIVE_PHYSTWIN_DIR, file: "double_lift_cloth_3.mp4" },
+    { dir: QUALITATIVE_PHYSTWIN_DIR, file: "double_lift_sloth.mp4" },
+    { dir: QUALITATIVE_PHYSTWIN_DIR, file: "double_lift_zebra.mp4" },
+    { dir: QUALITATIVE_PHYSTWIN_DIR, file: "double_stretch_sloth.mp4" },
+    { dir: QUALITATIVE_PHYSTWIN_DIR, file: "double_stretch_zebra.mp4" },
+    { dir: QUALITATIVE_PHYSTWIN_DIR, file: "rope_double_hand.mp4" },
+    { dir: QUALITATIVE_PHYSTWIN_DIR, file: "single_clift_cloth_1.mp4" },
+    { dir: QUALITATIVE_PHYSTWIN_DIR, file: "single_clift_cloth_3.mp4" },
+    { dir: QUALITATIVE_PHYSTWIN_DIR, file: "single_lift_cloth.mp4" },
+    { dir: QUALITATIVE_PHYSTWIN_DIR, file: "single_lift_cloth_1.mp4" },
+    { dir: QUALITATIVE_PHYSTWIN_DIR, file: "single_lift_cloth_3.mp4" },
+    { dir: QUALITATIVE_PHYSTWIN_DIR, file: "single_lift_cloth_4.mp4" },
+    { dir: QUALITATIVE_PHYSTWIN_DIR, file: "single_lift_dinosor.mp4" },
+    { dir: QUALITATIVE_PHYSTWIN_DIR, file: "single_lift_rope.mp4" },
+    { dir: QUALITATIVE_PHYSTWIN_DIR, file: "single_lift_sloth.mp4" },
+    { dir: QUALITATIVE_PHYSTWIN_DIR, file: "single_lift_zebra.mp4" },
+    { dir: QUALITATIVE_PHYSTWIN_DIR, file: "single_push_rope.mp4" },
+    { dir: QUALITATIVE_PHYSTWIN_DIR, file: "single_push_rope_1.mp4" },
+    { dir: QUALITATIVE_PHYSTWIN_DIR, file: "single_push_rope_4.mp4" },
+    { dir: QUALITATIVE_PHYSTWIN_DIR, file: "single_push_sloth.mp4" },
+    { dir: QUALITATIVE_PHYSTWIN_DIR, file: "weird_package.mp4" },
+    { dir: QUALITATIVE_SELF_DIR, file: "single_lift_rope.mp4" },
+    { dir: QUALITATIVE_SELF_DIR, file: "single_push_rope.mp4" },
+    { dir: QUALITATIVE_SELF_DIR, file: "double_lift_cloth.mp4" },
+    { dir: QUALITATIVE_SELF_DIR, file: "single_lift_cloth.mp4" },
+    { dir: QUALITATIVE_SELF_DIR, file: "double_lift_panda.mp4" },
+    { dir: QUALITATIVE_SELF_DIR, file: "single_lift_panda_arm.mp4" },
+    { dir: QUALITATIVE_SELF_DIR, file: "single_lift_panda_leg.mp4" },
+    { dir: QUALITATIVE_SELF_DIR, file: "double_lift_sloth.mp4" },
+    { dir: QUALITATIVE_SELF_DIR, file: "single_lift_sloth_arm.mp4" },
+    { dir: QUALITATIVE_SELF_DIR, file: "single_pull_sloth_leg.mp4" }
 ];
 
 /* Downstream Applications: one entry per application subsection.
@@ -167,11 +174,15 @@ function createVideoCard(src, caption) {
     return card;
 }
 
+function qualitativeSrc(entry) {
+    return encodeURI(entry.dir + entry.file);
+}
+
 function renderQualitative() {
     var grid = document.getElementById("qualitative-grid");
     if (!grid) { return; }
-    qualitativeVideos.forEach(function (filename) {
-        grid.appendChild(createVideoCard(QUALITATIVE_DIR + filename, stripExtension(filename)));
+    qualitativeVideos.forEach(function (entry) {
+        grid.appendChild(createVideoCard(qualitativeSrc(entry), stripExtension(entry.file)));
     });
 }
 
@@ -481,20 +492,136 @@ function setupReveal() {
     revealEls.forEach(function (el) { revealObserver.observe(el); });
 }
 
+var METRIC_COLUMNS = [
+    { key: "iou", label: "IoU \u2191", title: "Intersection over Union (%), higher is better" },
+    { key: "cd", label: "CD \u2193", title: "Chamfer Distance (m), lower is better" },
+    { key: "track", label: "Track \u2193", title: "Tracking error (m), lower is better" },
+    { key: "psnr", label: "PSNR \u2191", title: "Peak Signal-to-Noise Ratio (dB), higher is better" },
+    { key: "ssim", label: "SSIM \u2191", title: "Structural Similarity, higher is better" },
+    { key: "lpips", label: "LPIPS \u2193", title: "Learned Perceptual Image Patch Similarity, lower is better" }
+];
+
+function formatMetricDisplay(value) {
+    if (typeof value !== "number" || !isFinite(value)) { return "\u2014"; }
+    return value.toFixed(3);
+}
+
+function appendMetricCells(tr, group, phaseClass) {
+    METRIC_COLUMNS.forEach(function (col) {
+        var td = document.createElement("td");
+        td.className = "metrics-num " + phaseClass;
+        var value = group[col.key];
+        td.textContent = formatMetricDisplay(value);
+        if (typeof value === "number" && isFinite(value)) {
+            td.title = String(value);
+        }
+        tr.appendChild(td);
+    });
+}
+
+function appendGroupLabelRow(tbody, label, count) {
+    var tr = document.createElement("tr");
+    tr.className = "metrics-group-row";
+    var td = document.createElement("td");
+    td.colSpan = 13;
+    td.textContent = label + " (" + count + " sequences)";
+    tr.appendChild(td);
+    tbody.appendChild(tr);
+}
+
+function renderPerSequenceTable() {
+    var table = document.getElementById("per-sequence-table");
+    if (!table || typeof perSequenceMetrics === "undefined") { return; }
+
+    var thead = document.createElement("thead");
+    var groupRow = document.createElement("tr");
+    var taskHead = document.createElement("th");
+    taskHead.rowSpan = 2;
+    taskHead.scope = "col";
+    taskHead.className = "metrics-task-head";
+    taskHead.textContent = "Task";
+    groupRow.appendChild(taskHead);
+
+    var trainHead = document.createElement("th");
+    trainHead.colSpan = 6;
+    trainHead.scope = "colgroup";
+    trainHead.className = "metrics-phase-head metrics-train-head";
+    trainHead.textContent = "Training";
+    groupRow.appendChild(trainHead);
+
+    var testHead = document.createElement("th");
+    testHead.colSpan = 6;
+    testHead.scope = "colgroup";
+    testHead.className = "metrics-phase-head metrics-test-head";
+    testHead.textContent = "Testing";
+    groupRow.appendChild(testHead);
+    thead.appendChild(groupRow);
+
+    var metricRow = document.createElement("tr");
+    function appendMetricHeads(phaseClass) {
+        METRIC_COLUMNS.forEach(function (col) {
+            var th = document.createElement("th");
+            th.scope = "col";
+            th.className = "metrics-metric-head " + phaseClass;
+            th.textContent = col.label;
+            th.title = col.title;
+            metricRow.appendChild(th);
+        });
+    }
+    appendMetricHeads("metrics-train-head");
+    appendMetricHeads("metrics-test-head");
+    thead.appendChild(metricRow);
+
+    var tbody = document.createElement("tbody");
+    var lastDataset = null;
+    var datasetLabels = {
+        "PhysTwin": "PhysTwin Dataset",
+        "Self-collected": "Self-collected Dataset"
+    };
+
+    perSequenceMetrics.forEach(function (row) {
+        if (row.dataset !== lastDataset) {
+            var groupRows = perSequenceMetrics.filter(function (item) {
+                return item.dataset === row.dataset;
+            });
+            appendGroupLabelRow(tbody, datasetLabels[row.dataset] || row.dataset, groupRows.length);
+            lastDataset = row.dataset;
+        }
+        var tr = document.createElement("tr");
+        tr.dataset.dataset = row.dataset;
+        tr.dataset.task = row.task;
+        var taskCell = document.createElement("th");
+        taskCell.scope = "row";
+        taskCell.className = "metrics-task";
+        taskCell.textContent = row.task;
+        tr.appendChild(taskCell);
+        appendMetricCells(tr, row.training, "metrics-train");
+        appendMetricCells(tr, row.testing, "metrics-test");
+        tbody.appendChild(tr);
+    });
+
+    table.appendChild(thead);
+    table.appendChild(tbody);
+}
+
 function init() {
     renderQualitative();
+    renderPerSequenceTable();
     buildAppCarousels();
     buildComparisonGrid();
     renderSceneSelect();
     switchComparisonScene(DEFAULT_SCENE, true);
     observeVideos();
     setupReveal();
-    console.log("[PhysReal] qualitative videos: " + qualitativeVideos.length + "/28");
+    console.log("[PhysReal] qualitative videos: " + qualitativeVideos.length + "/32");
     console.log("[PhysReal] comparison scene mappings: " +
         (comparisonScenes.length * comparisonMethodOrder.length) + "/54");
     var appVideoTotal = applicationSections.reduce(function (sum, s) { return sum + s.videos.length; }, 0);
     console.log("[PhysReal] application videos: " + appVideoTotal + "/24 across " +
         applicationSections.length + " sections");
+    if (typeof perSequenceMetrics !== "undefined") {
+        console.log("[PhysReal] per-sequence metrics: " + perSequenceMetrics.length + "/32");
+    }
 }
 
 init();
