@@ -22,8 +22,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans">
-    <link rel="stylesheet" href="static/css/index.css?v=20260830-1">
-    <script defer src="static/js/index.js?v=20260830-1"></script>
+    <link rel="stylesheet" href="static/css/index.css?v=20261030-2">
+    <script defer src="static/js/sequence-metrics.js?v=20261030-2"></script>
+    <script defer src="static/js/index.js?v=20261030-2"></script>
 </head>
 <body>
 
@@ -121,6 +122,7 @@
         <h2 class="section-title reveal">Results</h2>
         <div class="results-sublinks reveal">
             <a href="#qualitative">Qualitative Results</a>
+            <a href="#per-sequence">Per-Sequence Quantitative Results</a>
             <a href="#comparisons">Comparison with Baselines</a>
         </div>
 
@@ -128,9 +130,24 @@
         <div class="results-subsection" id="qualitative">
             <h3 class="subsection-title reveal">Qualitative Results</h3>
             <p class="subsection-text reveal">
-                Qualitative results across the interaction sequences used in our evaluation.
+                Qualitative reconstruction and prediction results across 32 sequences, including
+                22 sequences from the PhysTwin dataset and 10 newly collected real-world sequences.
             </p>
             <div class="video-grid reveal" id="qualitative-grid"></div>
+        </div>
+
+        <!-- ---------- Per-Sequence Quantitative Results ---------- -->
+        <div class="results-subsection" id="per-sequence">
+            <h3 class="subsection-title reveal">Per-Sequence Quantitative Results</h3>
+            <p class="subsection-text reveal">
+                Detailed reconstruction and prediction metrics for all evaluated sequences.
+            </p>
+            <details class="metrics-details reveal">
+                <summary>View all 32 per-sequence results</summary>
+                <div class="metrics-table-wrap" role="region" aria-label="Per-sequence quantitative results" tabindex="0">
+                    <table class="metrics-table" id="per-sequence-table"></table>
+                </div>
+            </details>
         </div>
 
         <!-- ---------- Comparison with Baselines ---------- -->
